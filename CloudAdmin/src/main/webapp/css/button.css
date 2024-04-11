@@ -1,0 +1,144 @@
+.btnDiv{
+	display: flex;
+}
+
+.btnTableDiv{
+	display: flex;flex-direction: row-reverse;
+}
+
+.searchBtnDiv #searchBtn, #searchBtn1, #searchBtn2 {
+    position: absolute;
+    /* right: 10px; */
+    top: 50%;
+    transform: translate(0,-50%);
+    -webkit-transform: translate(0,-50%);
+    -o-transform: translate(0,-50%);
+    padding: 2px 7px;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+}
+#searchBtn {
+    display: inline-block;
+    position: relative;
+    background: url(../images/btn/searchBtn3.png) no-repeat;
+    background-size: contain;
+    width: 70px;
+    height: 20px;
+}
+
+.btnDiv input[type=button]{
+	font-family: "NanumGothicBold";
+    margin-right: 20px;
+    background: url(../images/btn/btnImage3.png) no-repeat;
+    width: 60px;
+    height: 40px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom: 15px;
+    padding-top: 0px;
+    border:0 !important;
+	outline:0 !important;
+}
+
+.buttonDf{
+	font-family:"NanumGothicBold";
+	margin-right: 20px;
+    background: url(../images/btn/btnImage2.png) no-repeat;
+    width: 100px;
+    height: 40px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.btn-small{
+	font-family: "NanumGothicBold";
+    margin-right: 20px;
+    background: url(../images/btn/btnImage2.png) no-repeat;
+    width: 60px;
+    height: 40px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+    padding-bottom:15px;
+}
+
+.btn-small button{
+	border:0 !important;
+	outline:0 !important;
+}
+
+/* 권한 별 선택여부 버튼 */
+
+
+.auth-btn-div{
+	display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.auth-btn-div > div{
+	height: 22px;
+    min-width: 95px;
+    margin: 10px 0;
+    line-height: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 14px;
+    letter-spacing: -0.5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0 5px;
+}
+
+.auth-btn-div>span{
+	margin: 0 10px;
+	font-weight:bold;
+}
+
+.auth1{
+	color: #3175f2;
+    box-shadow: inset 0 0 0 1px #3175f2;
+}
+
+.auth1.select{
+	background:#3175f2; 
+	color: #fff;
+}
+
+.auth2{
+	color: #0ba1be;
+    box-shadow: inset 0 0 0 1px #0ba1be;
+}
+
+.auth2.select{
+	background:#0ba1be; 
+	color: #fff;
+}
+
+.auth3{
+	color: #b2734e;
+    box-shadow: inset 0 0 0 1px #b2734e;
+}
+
+.auth3.select{
+	background:#b2734e; 
+	color: #fff;
+}
