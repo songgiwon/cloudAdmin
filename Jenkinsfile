@@ -21,15 +21,19 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'echo Running tests'
-                sh 'mvn test'
+		dir('CloudAdmin') {
+			sh 'mvn test'
+		}
             }
         }
         stage('Deploy') {
             steps {
                 // 여기에 WAR 파일을 특정 위치로 이동하는 명령어 추가
                 sh 'echo Deploying the build'
-		sh 'cp target/CloudAdmin*.war /kwsong/'
-                sh 'cd /kwsong && mv CloudAdmin*.war CloudAdmin.war'
+		dir('CloudAdmin') {
+			sh 'cp target/CloudAdmin*.war /kwsong/'
+			sh 'cd /kwsong && mv CloudAdmin*.war CloudAdmin.war'
+		}
             }
         }
 	// Deploy Admin 단계를 stages 블록 내로 이동
