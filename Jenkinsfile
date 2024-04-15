@@ -26,7 +26,7 @@ pipeline {
             steps {
                 // 여기에 WAR 파일을 특정 위치로 이동하는 명령어 추가
                 sh 'echo Deploying the build'
-		sh 'cp target/CloudAdmin-0.war /kwsong/'
+		sh 'cp target/CloudAdmin*.war /kwsong/'
                 sh 'cd /kwsong && mv CloudAdmin*.war CloudAdmin.war'
             }
         }
