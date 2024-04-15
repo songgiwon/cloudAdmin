@@ -45,16 +45,4 @@ pipeline {
             }
         }
     }
-    post {
-        always {
-            archiveArtifacts artifacts: 'target/*.war', fingerprint: true
-            junit 'target/surefire-reports/*.xml'
-        }
-        success {
-            sh 'echo Build succeeded!'
-        }
-        failure {
-            sh 'echo Build failed!'
-        }
-    }
 }
