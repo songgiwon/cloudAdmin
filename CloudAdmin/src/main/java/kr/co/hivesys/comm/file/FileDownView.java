@@ -16,7 +16,11 @@ import kr.co.hivesys.comm.file.vo.FileVo;
 
 @Component("fileDownView")
 public class FileDownView extends AbstractView{
-
+	
+	//윈도우용
+	//private String firstPath="C:\\resources";
+	//리눅스용
+	private String firstPath="/usr/local/tomcat/share_data/resources";
 
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
@@ -33,7 +37,7 @@ public class FileDownView extends AbstractView{
 	      
 	      //다운로드 시켜줄 파일의 실제 경로 구성하기 
 	      // File.separator 는 window 에서는 \ , linux 에서는 /  를 얻어오게 된다. 
-	      String path=request.getServletContext().getRealPath("/resources")+
+	      String path=firstPath+
 	                  File.separator+filepath;
 	      //다운로드할 파일에서 읽어들일 스트림 객체 생성하기
 	      FileInputStream fis=new FileInputStream(path);

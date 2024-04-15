@@ -89,8 +89,7 @@ public class ReportController{
 	
 	//문의하기 목록 조회
 	@RequestMapping(value= {
-			"/admin/report/reportList.ajax"
-			,"/client/support/reportList.ajax"})
+			"/admin/report/reportList.ajax"})
 	public @ResponseBody ModelAndView reqList( 
 			HttpServletRequest request
 			//,@RequestParam(required=false, value="idArr[]")List<String> listArr
@@ -109,8 +108,7 @@ public class ReportController{
 	
 	//등록 저장
 	@RequestMapping(value= {
-			"/admin/report/insertReport.ajax"
-			,"/client/support/insertReport.ajax"})
+			"/admin/report/insertReport.ajax"})
 	public ModelAndView insertReq(HttpSession httpSession, 
 			HttpServletRequest request,Model model
 			,@ModelAttribute("ReportVo") ReportVo inputVo
@@ -155,10 +153,6 @@ public class ReportController{
 			"/admin/report/reportInsert.do"
 			,"/admin/report/reportDetail.do"
 			,"/admin/report/reportUpdate.do"
-
-			,"/client/support/reportInsert.do"
-			,"/client/support/reportDetail.do"
-			,"/client/support/reportUpdate.do"
 	})
 	public @ResponseBody ModelAndView detail( @ModelAttribute("ReportVo") ReportVo thvo,HttpServletRequest request) throws Exception{
 		logger.debug("▶▶▶▶▶▶▶.회원정보 조회 목록!!!!!!!!!!!!!!!!");
@@ -196,7 +190,6 @@ public class ReportController{
 	// 수정 반영
 	@RequestMapping(value= {
 			"/admin/report/reportUpdate.ajax"
-			,"/client/support/reportUpdate.ajax"
 	})
 	public @ResponseBody ModelAndView update( 
 			@ModelAttribute("ReportVo") ReportVo inputVo
@@ -236,7 +229,6 @@ public class ReportController{
 	// 삭제
 	@RequestMapping(value= {
 			"/admin/report/reportDelete.do"
-			,"/client/support/reportDelete.do"
 	})
 	public @ResponseBody ModelAndView userDelete( @RequestParam(value="idArr[]")List<String> listArr,HttpServletRequest request) throws Exception{
 		logger.debug("▶▶▶▶▶▶▶.회원정보 삭제!!!!!!!!!!!!!!!!");
