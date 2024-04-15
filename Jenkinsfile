@@ -13,7 +13,9 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'echo Running build'
-                sh 'mvn clean package'
+		dir('CloudAdmin') {
+			sh 'mvn clean package'
+		}
             }
         }
         stage('Test') {
