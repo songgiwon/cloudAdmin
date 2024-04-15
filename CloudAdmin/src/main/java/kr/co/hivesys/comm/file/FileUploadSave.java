@@ -59,7 +59,7 @@ public class FileUploadSave implements ApplicationContextAware {
 		List<FileVo> exList = new ArrayList<>();
 		int i = 0;
 		try {
-			
+			//수정 0415 1619
 			logger.debug("■■■■■■■■■■■■■■■■■■■■■■■■■ firstPath ■■■■■■■■■■■■■■■■■■■■■■■■■ : "+firstPath);
 			logger.debug("■■■■■■■■■■■■■■■■■■■■■■■■■ fvo.getFILE_DIR() ■■■■■■■■■■■■■■■■■■■■■■■■■ : "+fvo.getFILE_DIR());
 			
