@@ -12,7 +12,7 @@
 	<script>
 		$(document).ready(function() {
 			console.log("문의하기");
-			$("#acDetailFrm").submit(function(e){
+			$("#btnSave").on("click",function(e){
 				console.log("문의하기 등록");
 				let frm = $("#acDetailFrm").serialize();
 				//let param = encodeURI(frm);
@@ -76,7 +76,8 @@
 		<div id="contents" class="contents-wrap">
 			<!-- work Start -->
 			<div id="work" class="work-wrap">
-			<form name="insertForm" id="acDetailFrm" method="post" action="/admin/support/notice/noticeList.do"  enctype="multipart/form-data">
+			<!-- action="/admin/support/notice/noticeList.do" -->
+			<form name="insertForm" id="acDetailFrm" method="post" action="return false"  enctype="multipart/form-data">
                 <!-- contents_box Start -->
                 <div id="contents_box" class="contents_box">
                     <!-- 컨텐츠 테이블 헤더 Start -->
@@ -145,10 +146,10 @@
                         <!-- btn_box Start -->
                         <div class="btn_box">
                             <div class="right">
-			                    <button type="submit"  class="btn btn_primary" style="" id="btnSave" data-term="L.등록" title="등록">
+			                    <button class="btn btn_primary" style="" id="btnSave" data-term="L.등록" title="등록">
 			                    	<span class="langSpan">등록</span>
 			                    </button>
-					            <button type="button"  class="btn" id="btnList" data-term="L.목록" title="목록" onclick="location.href='/admin/support/notice/noticeList.do'">
+					            <button class="btn" id="btnList" data-term="L.목록" title="목록" onclick="location.href='/admin/support/notice/noticeList.do'">
 									<span class="langSpan">취소</span>
 								</button>
 			                </div>

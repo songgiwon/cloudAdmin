@@ -11,7 +11,7 @@
 
 <script>
 	var updUrl="/admin/edit/content/touUpdate.do";
-	var delUrl="/admin/edit/content/touDelete.ajax";
+	var delUrl="/admin/edit/content/touDelete.do";
 	var delbak="/admin/edit/content/touList.do";
 	
 	
@@ -21,14 +21,14 @@
 		var tagId = $(that).attr("id");
 		$(this).attr('id');
 		if(tagId!="chkTd"){
-			$("#work").load("/admin/edit/content/touDetail.do",{"DOCUMENT_ID":tagId}); 
+			location.href="/admin/edit/content/touDetail.do?DOCUMENT_ID="+tagId; 
 		}
 	}
 	//삭제
 	function touDelete(that){
 		console.log("삭제");
 		var tagId = $(that).attr('name');
-		ajaxMethod('/admin/edit/content/touDelete.ajax',{"DOCUMENT_ID":tagId},'/admin/edit/content/touList.do','삭제되었습니다');
+		ajaxMethod('/admin/edit/content/touDelete.do',{"DOCUMENT_ID":tagId},'/admin/edit/content/touList.do','삭제되었습니다');
 	}
 	
 	$(document).ready( function() {

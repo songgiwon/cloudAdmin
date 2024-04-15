@@ -4,10 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<script type="text/javascript">
+	<title>CLOUD 24 365 관리자 페이지</title>
+	<jsp:include page="/cmn/admin/top.do" flush="false" />
+<script>
 	//이메일 체크
 	$(document).ready( function() {
+		console.log("사용자 상세");
 		var tagId='${data.USER_ID}';
+		
+		//입력정보 없을시
+		blankInput($(".ctn_tbl_td"),"입력정보 없음");
+		
 		//console.log("상세정보 진입 : "+tagId);
 		//목록 버튼 클릭 시
 		$("#btnList").click(function(){
@@ -16,7 +23,7 @@
 		
 		//수정 버튼 클릭 시
 		$("#btnUpdate").click(function(){
-			 $("#work").load("/admin/auth/user/userUpdate.do",{"USER_ID":tagId}); 
+			 location.href="/admin/auth/user/userUpdate.do?USER_ID="+tagId; 
 		});
 		//삭제 버튼 클릭 시
 		$("#btnDelete").click(function(){
@@ -24,7 +31,7 @@
 				var idArr=[]; // 회원 id값 배열
 				idArr.push(tagId);//배열에 아이디 값 삽입
 //				//console.log("보낼 값 : "+ idArr);
-				var url="/admin/auth/user/userDelete.ajax";
+				var url="/admin/auth/user/userDelete.do";
 				var data = {"idArr":idArr};
 				var callback= "/admin/auth/user/userList.do";
 				ajaxMethod(url, data, callback);
@@ -52,10 +59,6 @@
 		
 		<div id="title" class="title-wrap">
 			<div class="title-inner">
-				<!-- 타이틀 텝 구성 -->
-				<div class="title_segments" role="tablist">
-					<button class="nav-link active" role="tab" aria-selected="false">사용자 등록</button>
-				</div>
 			</div>
 		</div>
 		<!-- title end -->
@@ -67,7 +70,7 @@
                 <div id="contents_box" class="contents_box">
                     <!-- 컨텐츠 테이블 헤더 Start -->
                     <div class="ctn_tbl_header">
-                        <div class="ttl_ctn">등록</div><!-- 컨텐츠 타이틀 -->
+                        <div class="ttl_ctn">사용자 조회</div><!-- 컨텐츠 타이틀 -->
                         <div class="txt_info"><em class="txt_info_rep">*</em> 표시는 필수 입력 항목입니다.</div><!-- 설명글 -->
                     </div>
                     <!-- 컨텐츠 테이블 헤더 End -->
@@ -94,6 +97,13 @@
 								<div class="ctn_tbl_th fm_rep">권한 등급</div>
 								<div class="ctn_tbl_td">
 									${data.AUTH_NAME}
+								</div>
+							</div>
+	
+							<div class="ctn_tbl_row">
+								<div class="ctn_tbl_th fm_rep">소속 회사</div>
+								<div class="ctn_tbl_td">
+									${data.COMPANY_NAME}
 								</div>
 							</div>
 	

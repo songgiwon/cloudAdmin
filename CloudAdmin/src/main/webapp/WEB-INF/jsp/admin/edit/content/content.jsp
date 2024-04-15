@@ -19,7 +19,7 @@
 		});
 		
 		$("#mspDelete").on("click",function(){
-			ajaxMethod("/admin/edit/content/mspDelete.ajax");
+			ajaxMethod("/admin/edit/content/mspDelete.do");
 		});
 		
 		$("#touInsert").on("click",function(){

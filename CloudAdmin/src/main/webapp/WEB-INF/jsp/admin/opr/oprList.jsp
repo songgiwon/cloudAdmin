@@ -18,7 +18,7 @@
 
 <script>
 	var updUrl="/admin/client/companyUpdate.do";
-	var delUrl="/admin/client/companyDelete.ajax";
+	var delUrl="/admin/client/companyDelete.do";
 	var delbak="/admin/client/companyList.do";
 	
 	$(document).ready( function() {

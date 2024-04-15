@@ -17,7 +17,7 @@
 
 <script>
 	var updUrl="/admin/support/notice/noticeUpdate.do";
-	var delUrl="/admin/support/notice/noticeDelete.ajax";
+	var delUrl="/admin/support/notice/noticeDelete.do";
 	var delbak="/admin/support/notice/noticeList.do";
 	
 	$(document).ready( function() {
@@ -93,11 +93,11 @@
 			var tagId = $(this).parent().children().first().children().first().val();
 			$(this).attr('id');
 			if(tagId!="chkTd"){
-				$("#work").load("/admin/support/notice/noticeDetail.do",{"NOTICE_ID":tagId}); 
+				location.href="/admin/support/notice/noticeDetail.do?NOTICE_ID="+tagId; 
 			}
 		});
 
-		//데이트타임피커
+		/* //데이트타임피커
 		 var toDate = new Date();
 		 $('#datetimepicker1').datetimepicker({
 			 format:"YYYY-MM-DD" ,
@@ -106,7 +106,7 @@
 		 $('#datetimepicker2').datetimepicker({
 			 format:"YYYY-MM-DD",
 			 maxDate : moment()
-		});
+		}); */
 	});
 	
 	/* 검색 */
@@ -210,12 +210,12 @@
 							<input class="form-control" type="text" id="searchValue" name="searchValue"  onkeyup="if(event.keyCode == 13)search();"/>
 						</div>
 						
-						<div class="form-group col_3">
+						<!-- <div class="form-group col_3">
 							<label class="form-control-label">
 								<span class="langSpan">기간설정</span>
 							</label>
 							<div class="form_daterange" style="display: inline-flex;align-items: center;gap: 5px;" id="schDtBody">
-								<!-- 기간 -->
+								기간
 								<div class='input-group date' id='datetimepicker1'>
 									<input type='text' class="form-control dt_search" name=sDate id="sDate" required/>
 									<span class="input-group-addon">
@@ -237,7 +237,7 @@
 								<label for="mon_3" class="fm_radio" ><input type="radio" class="checkMonth" name="searchRadio" id="mon_3" value="3"><span class="checkmark"></span><span class="langSpan">최근3개월</span></label>
 								<label for="mon_6" class="fm_radio" ><input type="radio" class="checkMonth" name="searchRadio" id="mon_6" value="6"><span class="checkmark"></span><span class="langSpan">최근6개월</span></label>
 							</div>
-						</div>
+						</div> -->
 				   </form>
 					<div class="search_btn">
 						<button class="btn btn_sch btn_primary" id='btnSearch' onclick="search();" ><i class="ico_sch"></i><span class="langSpan">조회</span></button>

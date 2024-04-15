@@ -32,7 +32,7 @@
 </style>
 <script>
 	var updUrl="/admin/client/company/companyUpdate.do";
-	var delUrl="/admin/client/company/companyDelete.ajax";
+	var delUrl="/admin/client/company/companyDelete.do";
 	var delbak="/admin/client/company/companyList.do";
 	//데이터 테이블 관련
 	var iidx;//날짜컬럼 인덱스
@@ -101,6 +101,11 @@
             order: [[ 1, 'desc' ]]
             ,responsive: true
 			,language : lang_kor // //or lang_eng
+       	   ,"drawCallback": function() {
+       		   	console.log("공백처리함수");
+	       		//입력정보 없을시
+	       		blankInput($("td"),"입력정보 없음");
+       		}
 		});
 		
 		//테이블 액션에 대한 설정
@@ -117,7 +122,7 @@
 			var tagId = $(this).parent().children().first().children().first().val();
 			$(this).attr('id');
 			if(tagId!="chkTd"){
-				$("#work").load("/admin/client/company/companyDetail.do",{"COMPANY_ID":tagId}); 
+				location.href="/admin/client/company/companyDetail.do?COMPANY_ID="+tagId; 
 			}
 		});
 
@@ -203,7 +208,7 @@
 						<div class="form-group col_15">
 							<label class="form-control-label"><span class="langSpan">상태</span></label>
 							<div class="fm_checkbox_box">
-								<label for="svcAll" class="fm_radio" ><input type="radio" class="checkMonth" name="searchRadio1" id="svcAll" value="1" checked><span class="checkmark"></span><span class="langSpan">전체</span></label>
+								<label for="svcAll" class="fm_radio" ><input type="radio" class="checkMonth" name="searchRadio1" id="svcAll" value="" checked><span class="checkmark"></span><span class="langSpan">전체</span></label>
 								<label for="svcNow" class="fm_radio" ><input type="radio" class="checkMonth" name="searchRadio1" id="svcNow" value="svcNow"><span class="checkmark"></span><span class="langSpan">서비스 중</span></label>
 								<label for="svcEnd" class="fm_radio" ><input type="radio" class="checkMonth" name="searchRadio1" id="svcEnd" value="svcEnd"><span class="checkmark"></span><span class="langSpan">서비스 종료</span></label>
 							</div>

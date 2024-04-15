@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 	<title>CLOUD 24 365 관리자 페이지</title>
 <script src="<%=request.getContextPath()%>/js/cloud.js"></script>
+<jsp:include page="/cmn/admin/top.do" flush="false" />
+
 <script>
 	$(document).ready( function() {
 		console.log("문의하기 답변");
@@ -71,6 +73,31 @@
 	});
 </script>
 </head>
+<body class="open">
+    <!-- lnb Start ------------------>
+    <aside id="lnb" class="lnb">
+        <a class="lnb-control" title="메뉴 펼침/닫침"><span class="menu-toggle">메뉴 펼침/닫침</span></a>
+        <nav id="navbar" class="navbar navbar-expand-sm navbar-default">
+            <ul class="menu-inner"></ul>
+        </nav>
+    </aside>
+    <!-- lnb End ------------------>
+
+    <!-- container Start ------------------>
+    <div id="container" class="container-wrap">
+		<!-- header Start ------------------>
+		<div id="header" class="header-wrap"></div>
+		
+		<div id="title" class="title-wrap">
+			<div class="title-inner">
+			</div>
+		</div>
+		<!-- title end -->
+		<!-- contents Start ------------------>
+		<div id="contents" class="contents-wrap">
+			<!-- work Start -->
+			<div id="work" class="work-wrap">
+
 <div class="ctn_tbl_header">
     <div class="ttl_ctn">문의하기 상세</div><!-- 컨텐츠 타이틀 -->
 </div>
@@ -135,9 +162,7 @@
 	<div class="ctn_tbl_row">
 	    <div class="ctn_tbl_th">문의내용</div>
 	    <div class="ctn_tbl_td">
-	        <textarea id="REQ_QUESTION" name="REQ_QUESTION" class="long-cont" style="height:200px;" readonly>
-	        	${reqVo.REQ_QUESTION}
-	        </textarea>
+	        <textarea id="REQ_QUESTION" name="REQ_QUESTION" class="long-cont" style="height:200px;" readonly>${reqVo.REQ_QUESTION}</textarea>
 	    </div>
 	</div>
 	 <c:if test="${reqVo.REQ_STATUS!=0}">
@@ -206,7 +231,7 @@
 							<button type="submit"  class="btn btn_primary" style="" id="btnSet" data-term="L.등록" title="등록"><span class="langSpan">담당자배정</span></button>
 			           </c:otherwise>
 		           </c:choose>
-					<button type="button" class="btn" id="btnList" alt="저장" value="저장"><span class="langSpan">목록으로</span></button>
+					<button type="button" class="btn" id="btnList" onclick="history.back();" alt="저장" value="저장"><span class="langSpan">목록으로</span></button>
 	            </div>
 	        </div>
 	    </div>
@@ -214,3 +239,11 @@
 	<!-- btn_box End -->
 </div>
 </form>
+			            </div>
+			<!-- work End -->
+        </div>
+		<!-- contents End ------------------>
+    </div>
+    <!-- container End ------------------>
+</body>
+</html>

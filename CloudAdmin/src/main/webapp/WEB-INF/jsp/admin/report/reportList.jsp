@@ -17,7 +17,7 @@
 
 <script>
 	var updUrl="/admin/report/reportUpdate.do";
-	var delUrl="/admin/report/reportDelete.ajax";
+	var delUrl="/admin/report/reportDelete.do";
 	var delbak="/admin/report/reportList.do";
 	
 	$(document).ready( function() {
@@ -94,7 +94,7 @@
 			var tagId = $(this).parent().children().first().children().first().val();
 			$(this).attr('id');
 			if(tagId!="chkTd"){
-				$("#work").load("/admin/report/reportDetail.do",{"REPORT_ID":tagId}); 
+				location.href="/admin/report/reportDetail.do?REPORT_ID="+tagId; 
 			}
 		});
 

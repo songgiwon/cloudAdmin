@@ -54,6 +54,31 @@
 	</script>
 	
 </head>
+<body class="open">
+    <!-- lnb Start ------------------>
+    <aside id="lnb" class="lnb">
+        <a class="lnb-control" title="메뉴 펼침/닫침"><span class="menu-toggle">메뉴 펼침/닫침</span></a>
+        <nav id="navbar" class="navbar navbar-expand-sm navbar-default">
+            <ul class="menu-inner"></ul>
+        </nav>
+    </aside>
+    <!-- lnb End ------------------>
+
+    <!-- container Start ------------------>
+    <div id="container" class="container-wrap">
+		<!-- header Start ------------------>
+		<div id="header" class="header-wrap"></div>
+		
+		<div id="title" class="title-wrap">
+			<div class="title-inner">
+			</div>
+		</div>
+		<!-- title end -->
+		<!-- contents Start ------------------>
+		<div id="contents" class="contents-wrap">
+			<!-- work Start -->
+			<div id="work" class="work-wrap">
+
 <form name="insertForm" id="acDetailFrm" method="post" enctype="multipart/form-data" action="/admin/support/faq/faqList.do" >
     <!-- contents_box Start -->
     <div id="contents_box" class="contents_box">
@@ -112,5 +137,12 @@
 	    </div>
     <!-- footer End ------------------>
     </form>
+			            </div>
+			<!-- work End -->
+        </div>
+		<!-- contents End ------------------>
+    </div>
+    <!-- container End ------------------>
+</body>
 </html>
 

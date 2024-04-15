@@ -9,7 +9,7 @@
 	<jsp:include page="/cmn/admin/top.do" flush="false" />
 <script>
 	var updUrl="/admin/auth/user/userUpdate.do";
-	var delUrl="/admin/auth/user/userDelete.ajax";
+	var delUrl="/admin/auth/user/userDelete.do";
 	var delbak="/admin/auth/user/userList.do";
 	$(document).ready( function() {
 		var schChkId=false;
@@ -59,9 +59,7 @@
 			}
 			
 			//유효성 체크
-			var schChkId = schChkKey('USER_ID');
-			
-			if(boardWriteCheck(form) && telChk() && schChkId){
+			if(idPwChk(form) && telChk() && schChkKey('USER_ID')){
 				console.log("사용자등록 유효성 chk 성공");
 				// serialize는 form의 <input> 요소들의 name이 배열형태로 그 값이 인코딩되어 URL query string으로 하는 메서드
 				let queryString = $(this).serialize();
@@ -150,9 +148,11 @@
                     <div class="ctn_tbl_area">
                         <div class="ctn_tbl_row">
 							<div class="ctn_tbl_row">
-								<div class="ctn_tbl_th fm_rep">ID</div>
+								<div class="ctn_tbl_th fm_rep" style="display: flex;flex-direction: column;align-items: flex-start;">ID
+								<div class="txt_info">6~10자</div>
+								</div>
 								<div class="ctn_tbl_td mw_50">
-									<input type="text" class="form-control" id="USER_ID" name="USER_ID" value="${data.NOTICE_TITLE}"  maxlength="10" onkeyup="spaceChk(this);" onkeydown="spaceChk(this);" required/>
+									<input type="text" class="form-control" id="USER_ID" name="USER_ID" maxlength="10" onkeyup="valiChkAll(this,1,1);" onkeydown="valiChkAll(this,1,1);" required/>
 									<div class="search_btn">
 									   <button type="button" class="btn btn_sch btn_primary" id="schChkKey"><i class="ico_sch"></i><span class="langSpan">조회</span></button>
 								   </div>
@@ -165,28 +165,28 @@
 								<div class="txt_info">영문+특수+숫자 8~15자</div>
 							</div>
 							<div class="ctn_tbl_td">
-								<input type="password" id="userPw1" name="USER_PW" class="form-control"  maxlength="15" onkeyup="spaceChk(this);" onkeydown="spaceChk(this);" required>
+								<input type="password" id="userPw1" name="USER_PW" class="form-control"  maxlength="15"  onkeyup="valiChkAll(this,1,1,1,1);" onkeydown="valiChkAll(this,1,1,1,1);" required>
 							</div>
 						</div>
 					
 						<div class="ctn_tbl_row">
 							<div class="ctn_tbl_th fm_rep">비밀번호 확인</div>
 							<div class="ctn_tbl_td">
-								<input type="password" id="userPw2" name="USER_PW2" class="form-control"  maxlength="15" onkeyup="spaceChk(this);" onkeydown="spaceChk(this);" required>
+								<input type="password" id="userPw2" name="USER_PW2" class="form-control"  maxlength="15"  onkeyup="valiChkAll(this,1,1,1,1);" onkeydown="valiChkAll(this,1,1,1,1);" required>
 							</div>
 						</div>
 						
 						<div class="ctn_tbl_row">
 							<div class="ctn_tbl_th fm_rep">이름</div>
 							<div class="ctn_tbl_td">
-								<input type="text" name="USER_NAME" class="form-control"  maxlength="20" onkeyup="spaceChk(this);" onkeydown="spaceChk(this);" required>
+								<input type="text" name="USER_NAME" class="form-control"  maxlength="20" onkeyup="valiChkAll(this,1,1);" onkeydown="valiChkAll(this,1,1);" required>
 							</div>
 						</div>
 						
 						<div class="ctn_tbl_row">
 							<div class="ctn_tbl_th fm_rep">권한 등급</div>
 							<div class="ctn_tbl_td">
-								<select class="form-control mw_30"  style="width:120px;" id="areaCodeSel" name="AUTH_CODE">
+								<select class="form-control mw_30"  style="width:120px;" id="authCodeSel" name="AUTH_CODE">
 									<c:forEach var="authVo" items="${authList}">
 										<option value="${authVo.authCode}">${authVo.authName}</option>
 									</c:forEach>
@@ -195,16 +195,27 @@
 						</div>
 
 						<div class="ctn_tbl_row">
+							<div class="ctn_tbl_th fm_rep">소속 회사</div>
+							<div class="ctn_tbl_td">
+								<select class="form-control mw_30"  style="width:120px;" id="companyCodeSel" name="COMPANY_ID">
+									<c:forEach var="companyVo" items="${companyList}">
+										<option value="${companyVo.COMPANY_ID}">${companyVo.COMPANY_NAME}</option>
+									</c:forEach>
+								</select>					
+							</div>
+						</div>
+
+						<div class="ctn_tbl_row">
 							<div class="ctn_tbl_th">직급</div>
 							<div class="ctn_tbl_td">
-								<input type="text" name="USER_RANK"  maxlength="10" onkeyup="spaceChk(this);" onkeydown="spaceChk(this);" class="form-control">					
+								<input type="text" name="USER_RANK"  maxlength="10" onkeyup="valiChkAll(this,1,1);" onkeydown="valiChkAll(this,1,1);" class="form-control">					
 							</div>
 						</div>
 
 						<div class="ctn_tbl_row">
 							<div class="ctn_tbl_th">부서</div>
 							<div class="ctn_tbl_td">
-								<input type="text" name="USER_DEPT"  maxlength="20" onkeyup="spaceChk(this);" onkeydown="spaceChk(this);" class="form-control">					
+								<input type="text" name="USER_DEPT"  maxlength="20" onkeyup="valiChkAll(this,1,1);" onkeydown="valiChkAll(this,1,1);" class="form-control">					
 							</div>
 						</div>
 						
@@ -260,7 +271,7 @@
 			                    <button type="submit" class="btn btn_primary" style="" id="btnSave" data-term="L.등록" title="등록">
 			                    	<span class="langSpan">등록</span>
 			                    </button>
-					            <button class="btn" id="btnCancel" data-term="L.목록" title="목록" onclick="location.href='/admin/auth/user/userList.do'">
+					            <button type="button" class="btn" id="btnCancel" data-term="L.목록" title="목록" onclick="location.href='/admin/auth/user/userList.do'">
 									<span class="langSpan">취소</span>
 								</button>
 			                </div>

@@ -11,7 +11,7 @@
 
 <script>
 	var updUrl="/admin/edit/content/privacySvcUpdate.do";
-	var delUrl="/admin/edit/content/privacySvcDelete.ajax";
+	var delUrl="/admin/edit/content/privacySvcDelete.do";
 	var delbak="/admin/edit/content/privacySvcList.do";
 	
 	//상세 화면 조회
@@ -20,14 +20,14 @@
 		var tagId = $(that).attr("id");
 		$(this).attr('id');
 		if(tagId!="chkTd"){
-			$("#work").load("/admin/edit/content/privacySvcDetail.do",{"DOCUMENT_ID":tagId}); 
+			location.href="/admin/edit/content/privacySvcDetail.do?DOCUMENT_ID="+tagId; 
 		}
 	}
 	//삭제
 	function privacySvcDelete(that){
 		console.log("삭제");
 		var tagId = $(that).attr('name');
-		ajaxMethod('/admin/edit/content/privacySvcDelete.ajax',{"DOCUMENT_ID":tagId},'/admin/edit/content/privacySvcList.do','삭제되었습니다');
+		ajaxMethod('/admin/edit/content/privacySvcDelete.do',{"DOCUMENT_ID":tagId},'/admin/edit/content/privacySvcList.do','삭제되었습니다');
 	}
 	
 	$(document).ready( function() {

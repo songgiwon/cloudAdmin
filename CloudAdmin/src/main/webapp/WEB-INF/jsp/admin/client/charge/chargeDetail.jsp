@@ -20,7 +20,7 @@
 		});
 		//수정 버튼 클릭 시
 		$("#btnUpdate").click(function(){
-			 $("#work").load("/admin/report/reportUpdate.do",{"REPORT_ID":tagId}); 
+			 location.href="/admin/report/reportUpdate.do",{"REPORT_ID":tagId}); 
 		});
 		//삭제 버튼 클릭 시
 		$("#btnDelete").click(function(){
@@ -28,7 +28,7 @@
 				var idArr=[]; // 회원 id값 배열
 				idArr.push(tagId);//배열에 아이디 값 삽입
 				//console.log("보낼 값 : "+ idArr);
-				var url="/admin/report/reportDelete.ajax";
+				var url="/admin/report/reportDelete.do";
 				var data = {"idArr":idArr};
 				var callback= "/admin/report/reportList.do";
 				ajaxMethod(url, data, callback);

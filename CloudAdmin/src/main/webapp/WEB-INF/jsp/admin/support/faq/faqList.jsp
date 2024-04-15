@@ -17,7 +17,7 @@
 
 <script>
 	var updUrl="/admin/support/faq/faqUpdate.do";
-	var delUrl="/admin/support/faq/faqDelete.ajax";
+	var delUrl="/admin/support/faq/faqDelete.do";
 	var delbak="/admin/support/faq/faqList.do";
 	
 	$(document).ready( function() {
@@ -93,7 +93,7 @@
 			var tagId = $(this).parent().children().first().children().first().val();
 			$(this).attr('id');
 			if(tagId!="chkTd"){
-				$("#work").load("/admin/support/faq/faqDetail.do",{"FAQ_ID":tagId}); 
+				location.href="/admin/support/faq/faqDetail.do?FAQ_ID="+tagId; 
 			}
 		});
 

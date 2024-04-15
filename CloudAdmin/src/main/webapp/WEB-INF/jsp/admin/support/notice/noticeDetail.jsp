@@ -8,6 +8,8 @@
 <head>
 <meta charset="UTF-8">
 	<title>CLOUD 24 365 관리자 페이지</title>
+	<jsp:include page="/cmn/admin/top.do" flush="false" />
+	
 <script>
 
 	$(document).ready( function() {
@@ -20,7 +22,7 @@
 		});
 		//수정 버튼 클릭 시
 		$("#btnUpdate").click(function(){
-			 $("#work").load("/admin/support/notice/noticeUpdate.do",{"NOTICE_ID":tagId}); 
+			 location.href="/admin/support/notice/noticeUpdate.do?NOTICE_ID="+tagId; 
 		});
 		//삭제 버튼 클릭 시
 		$("#btnDelete").click(function(){
@@ -28,7 +30,7 @@
 				var idArr=[]; // 회원 id값 배열
 				idArr.push(tagId);//배열에 아이디 값 삽입
 //				//console.log("보낼 값 : "+ idArr);
-				var url="/admin/support/notice/noticeDelete.ajax";
+				var url="/admin/support/notice/noticeDelete.do";
 				var data = {"idArr":idArr};
 				var callback= "/admin/support/notice/noticeList.do";
 				ajaxMethod(url, data, callback);
@@ -38,6 +40,31 @@
 	
 </script>
 </head>
+<body class="open">
+    <!-- lnb Start ------------------>
+    <aside id="lnb" class="lnb">
+        <a class="lnb-control" title="메뉴 펼침/닫침"><span class="menu-toggle">메뉴 펼침/닫침</span></a>
+        <nav id="navbar" class="navbar navbar-expand-sm navbar-default">
+            <ul class="menu-inner"></ul>
+        </nav>
+    </aside>
+    <!-- lnb End ------------------>
+
+    <!-- container Start ------------------>
+    <div id="container" class="container-wrap">
+		<!-- header Start ------------------>
+		<div id="header" class="header-wrap"></div>
+		
+		<div id="title" class="title-wrap">
+			<div class="title-inner">
+			</div>
+		</div>
+		<!-- title end -->
+		<!-- contents Start ------------------>
+		<div id="contents" class="contents-wrap">
+			<!-- work Start -->
+			<div id="work" class="work-wrap">
+	
                 <!-- contents_box Start -->
                 <div id="contents_box" class="contents_box">
                     <!-- 컨텐츠 테이블 헤더 Start -->
@@ -92,9 +119,7 @@
                         <div class="ctn_tbl_row">
                             <div class="ctn_tbl_th">내용</div>
                             <div class="ctn_tbl_td">
-                                <textarea id="CONTENT" name="CONTENT" class="long-cont" style="height:470px;" readonly>
-                                ${data.CONTENT}
-                                </textarea>
+                                <textarea id="CONTENT" name="CONTENT" class="long-cont" style="height:470px;" readonly>${data.CONTENT}</textarea>
                             </div>
                         </div>
                     </div>
@@ -125,4 +150,11 @@
                     </div>
                 </div>
                 <!-- footer End ------------------>
+			            </div>
+			<!-- work End -->
+        </div>
+		<!-- contents End ------------------>
+    </div>
+    <!-- container End ------------------>
+</body>
 </html>

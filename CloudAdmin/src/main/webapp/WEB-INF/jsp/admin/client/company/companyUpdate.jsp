@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 	<title>CLOUD 24 365 관리자 페이지</title>
+	<jsp:include page="/cmn/admin/top.do" flush="false" />
 	<!-- JS -->
 	<script src="<%=request.getContextPath()%>/js/jquery.js"></script>
 	<script src="<%=request.getContextPath()%>/js/jquery.migrate.js"></script>
@@ -55,7 +56,30 @@
 	</script>
 	
 </head>
+<body class="open">
+    <!-- lnb Start ------------------>
+    <aside id="lnb" class="lnb">
+        <a class="lnb-control" title="메뉴 펼침/닫침"><span class="menu-toggle">메뉴 펼침/닫침</span></a>
+        <nav id="navbar" class="navbar navbar-expand-sm navbar-default">
+            <ul class="menu-inner"></ul>
+        </nav>
+    </aside>
+    <!-- lnb End ------------------>
 
+    <!-- container Start ------------------>
+    <div id="container" class="container-wrap">
+		<!-- header Start ------------------>
+		<div id="header" class="header-wrap"></div>
+		
+		<div id="title" class="title-wrap">
+			<div class="title-inner">
+			</div>
+		</div>
+		<!-- title end -->
+		<!-- contents Start ------------------>
+		<div id="contents" class="contents-wrap">
+			<!-- work Start -->
+			<div id="work" class="work-wrap">
 <form name="insertForm" id="acDetailFrm" method="post" action="/admin/client/company/companyList.do"  enctype="multipart/form-data">
 	<div id="contents_box" class="contents_box">
 		<!-- 컨텐츠 테이블 헤더 Start -->
@@ -452,5 +476,11 @@
 		    </div>
 		</div>
 	</form>
-
+            </div>
+			<!-- work End -->
+        </div>
+		<!-- contents End ------------------>
+    </div>
+    <!-- container End ------------------>
+</body>
 </html>

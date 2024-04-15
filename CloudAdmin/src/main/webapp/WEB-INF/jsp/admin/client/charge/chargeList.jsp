@@ -21,7 +21,7 @@
 </style>
 <script>
 	var updUrl="/admin/client/charge/chargeUpdate.do";
-	var delUrl="/admin/client/charge/chargeDelete.ajax";
+	var delUrl="/admin/client/charge/chargeDelete.do";
 	var delbak="/admin/client/charge/chargeList.do";
 	
 	$(document).ready( function() {
@@ -98,7 +98,7 @@
 			var tagId = $(this).parent().children().first().children().first().val();
 			$(this).attr('id');
 			if(tagId!="chkTd"){
-				$("#work").load("/admin/client/charge/chargeDetail.do",{"charge_ID":tagId}); 
+				location.href="/admin/client/charge/chargeDetail.do",{"charge_ID":tagId}); 
 			}
 		}); */
 

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 	<title>CLOUD 24 365 관리자 페이지</title>
+	<jsp:include page="/cmn/admin/top.do" flush="false" />
 <script>
 
 	$(document).ready( function() {
@@ -17,24 +18,41 @@
 		});
 		$("#btnDelete").on("click",function(){
 			console.log("이용약관 삭제");
-			ajaxMethod('/admin/edit/content/touDelete.ajax',{"DOCUMENT_ID":tagId},'/admin/edit/content/touList.do','삭제되었습니다');
+			ajaxMethod('/admin/edit/content/touDelete.do',{"DOCUMENT_ID":tagId},'/admin/edit/content/touList.do','삭제되었습니다');
 		});
 	});
 	
 </script>
 </head>
-<body>
+<body class="open">
+    <!-- lnb Start ------------------>
+    <aside id="lnb" class="lnb">
+        <a class="lnb-control" title="메뉴 펼침/닫침"><span class="menu-toggle">메뉴 펼침/닫침</span></a>
+        <nav id="navbar" class="navbar navbar-expand-sm navbar-default">
+            <ul class="menu-inner"></ul>
+        </nav>
+    </aside>
+    <!-- lnb End ------------------>
+
+    <!-- container Start ------------------>
+    <div id="container" class="container-wrap">
+		<!-- header Start ------------------>
+		<div id="header" class="header-wrap"></div>
+		
+		<div id="title" class="title-wrap">
+			<div class="title-inner">
+			</div>
+		</div>
+		<!-- title end -->
+		<!-- contents Start ------------------>
+		<div id="contents" class="contents-wrap">
+			<!-- work Start -->
+			<div id="work" class="work-wrap">
 	<div class="title">
 		<h3>이용약관 ${data.DOCUMENT_ID}</h3>
 	</div>
 	<div>
-		<textarea id="TEXT_VAL" class="long-cont" style="width: 75vw;height: 55vh;resize:none;" readonly>
-			${data.TEXT_VAL}
-		</textarea>
-		<div class="btnDiv" style="flex-direction: row-reverse;">
-	   		<input type="button" id="btnList" alt="목록으로" value="목록">
-	   		<input type="button" id="btnDelete" alt="삭제" value="삭제">
-		</div>			
+		<textarea id="TEXT_VAL" class="long-cont" style="width: 75vw;height: 55vh;resize:none;" readonly>${data.TEXT_VAL}</textarea>
 	</div>
 	
 	<div id="footer" class="footer-wrap">
@@ -48,5 +66,11 @@
             </div>
         </div>
     </div>
+           </div>
+			<!-- work End -->
+        </div>
+		<!-- contents End ------------------>
+    </div>
+    <!-- container End ------------------>
 </body>
 </html>

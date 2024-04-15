@@ -9,7 +9,7 @@
 	<jsp:include page="/cmn/admin/top.do" flush="false" />
 <script>
 	var updUrl="/admin/auth/user/userUpdate.do";
-	var delUrl="/admin/auth/user/userDelete.ajax";
+	var delUrl="/admin/auth/user/userDelete.do";
 	var delbak="/admin/auth/user/userList.do";
 	//데이터 테이블 관련
 	var iidx;//날짜컬럼 인덱스
@@ -43,6 +43,7 @@
             		/* ,className: "select-checkbox" */
                 },
                 {data:"user_ID"},
+                {data:"company_NAME"},
                 {data:"auth_NAME"},
                 {data:"user_NAME"},
                 {data:"user_EMAIL"},
@@ -62,10 +63,13 @@
             },
             order: [[ 6, 'desc' ]]
             ,responsive: true
-           ,language : 'lang_kor' // //or lang_eng
+           ,language : lang_kor // //or lang_eng
+       	   ,"drawCallback": function() {
+       		   	console.log("공백처리함수");
+	       		//입력정보 없을시
+	       		blankInput($("td"),"입력정보 없음");
+       		}
 		});
-
-
 		//테이블 액션에 대한 설정
 		tbAction("tableList");
 		
@@ -86,18 +90,13 @@
 	    	}
 		});
 		
-		//등록 화면 조회
-		$("#btnInsert").click(function() {
-			location.href="/admin/auth/user/userInsert.do";
-		});
-		
 		//상세 화면 조회
 		$("#tableList").on("click", "tbody td:not(':first-child')", function(){
 			//console.log("목록에서 상세요소 클릭");
 			var tagId = $(this).parent().children().first().children().first().val();
 			$(this).attr('id');
 			if(tagId!="chkTd"){
-				$("#work").load("/admin/auth/user/userDetail.do",{"USER_ID":tagId}); 
+				location.href="/admin/auth/user/userDetail.do?USER_ID="+tagId;
 			}
 		});
 
@@ -113,7 +112,17 @@
 			 //defaultDate:moment(),
 			 maxDate : moment()
 		});
+		
 	});
+	
+	/* 검색 */
+	 function search(){
+		 console.log("검색");
+		 let frm = $("#searchFrm").serialize();
+		 var tagUrl="/admin/auth/user/userList.ajax";
+		 tbSearch("tableList",tagUrl,frm);
+	 }
+	
 </script>
 </head>
 <body class="open">
@@ -196,6 +205,7 @@
 								<tr>
 									<th><input type="checkbox" id="chkAll" class="chk"></th>
 									<th>ID</th>
+									<th>고객사명</th>
 									<th>사용자 권한</th>
 									<th>사용자명</th>
 									<th>이메일</th>
@@ -228,5 +238,6 @@
     </div>
     <!-- container End ------------------>
 </body>
+
 </html>
 </html>

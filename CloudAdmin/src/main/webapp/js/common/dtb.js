@@ -64,28 +64,7 @@ function tbUpdate(that,paramUrl,key){
 				tagId = $("#chk"+i).val();
 			}
 		}
-		//사용하는 vo에 따른 분기처리
-		//향후 개선이 필요함...함수자체적으로
-		//걍 여기서 리턴값을 tagId로 넘겨서 화면에서 처리할것인지
-		//이거근데 암만생각해도 미개한 방법인데 ㅡㅡ
-		if(paramUrl.indexOf("user")!=-1){
-			$("#work").load(paramUrl,{"USER_ID":tagId});
-		}
-		if(paramUrl.indexOf("company")!=-1){
-			$("#work").load(paramUrl,{"COMPANY_ID":tagId});
-		}
-		if(paramUrl.indexOf("notice")!=-1){
-			$("#work").load(paramUrl,{"NOTICE_ID":tagId});
-		}
-		if(paramUrl.indexOf("request")!=-1){
-			$("#work").load(paramUrl,{"REQ_ID":tagId});
-		}
-		if(paramUrl.indexOf("faq")!=-1){
-			$("#work").load(paramUrl,{"FAQ_ID":tagId});
-		}
-		if(paramUrl.indexOf("report")!=-1){
-			$("#work").load(paramUrl,{"REPORT_ID":tagId});
-		}
+		location.href=paramUrl+"?"+key+"="+tagId
 	}
 }
 

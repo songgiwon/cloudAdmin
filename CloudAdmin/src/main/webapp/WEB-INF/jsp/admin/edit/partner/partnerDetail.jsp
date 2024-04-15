@@ -48,7 +48,7 @@
 		$("#btnDelete").on("click",function(){
 			if(confirm("선택하신 고객사를 삭제하시겠습니까?")==true){
 				let frm = $("#acDetailFrm").serialize();
-				var url='/admin/edit/partner/partnerDelete.ajax';
+				var url='/admin/edit/partner/partnerDelete.do';
 				var data = frm;
 				var callback= "/admin/edit/partner/client.do";
 				ajaxMethod(url, data, callback);

@@ -56,6 +56,30 @@
 </script>
 
 </head>
+<body class="open">
+    <!-- lnb Start ------------------>
+    <aside id="lnb" class="lnb">
+        <a class="lnb-control" title="메뉴 펼침/닫침"><span class="menu-toggle">메뉴 펼침/닫침</span></a>
+        <nav id="navbar" class="navbar navbar-expand-sm navbar-default">
+            <ul class="menu-inner"></ul>
+        </nav>
+    </aside>
+    <!-- lnb End ------------------>
+
+    <!-- container Start ------------------>
+    <div id="container" class="container-wrap">
+		<!-- header Start ------------------>
+		<div id="header" class="header-wrap"></div>
+		
+		<div id="title" class="title-wrap">
+			<div class="title-inner">
+			</div>
+		</div>
+		<!-- title end -->
+		<!-- contents Start ------------------>
+		<div id="contents" class="contents-wrap">
+			<!-- work Start -->
+			<div id="work" class="work-wrap">
 
 <!-- contents_box Start -->
 <form name="insertForm" id="acDetailFrm" method="post" enctype="multipart/form-data" action="/admin/support/notice/noticeList.do">
@@ -115,9 +139,7 @@
 			<div class="ctn_tbl_row">
 				<div class="ctn_tbl_th">내용</div>
 				<div class="ctn_tbl_td">
-					<textarea id="CONTENT" name="CONTENT" class="long-cont"style="height: 470px;resize:none;" required>
-						${data.CONTENT}
-                    </textarea>
+					<textarea id="CONTENT" name="CONTENT" class="long-cont"style="height: 470px;resize:none;" required>${data.CONTENT}</textarea>
 				</div>
 			</div>
 		</div>
@@ -143,5 +165,12 @@
 	</div>
 	<!-- footer End ------------------>
 </form>
+			            </div>
+			<!-- work End -->
+        </div>
+		<!-- contents End ------------------>
+    </div>
+    <!-- container End ------------------>
+</body>
 </html>
 

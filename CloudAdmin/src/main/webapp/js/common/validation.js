@@ -1,24 +1,4 @@
 /************************************************************************
-함수명 : pwReg
-설 명 : 비밀번호 정규식(유효성 검사)
-인 자 : pwVal(받아온 비밀번호 값)
-사용법 : 비밀번호 형식 체크할 때
-(형식 달라질 때마다 정규식 핸들링 필요)
-작성일 : 2024-04-08
-작성자 : 기술연구소 정다빈
-수정일        수정자       수정내용
------------ ------ -------------------
-2024-04-08   정다빈       최초작성
-************************************************************************/
-function pwReg(inputVal){
-	let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
-	if( !reg.test(inputVal) ) {
-		alert("비밀번호 형식에 위배됩니다.(영문+특수+숫자 8~15자)");
-	    return false;
-	}
-}
-
-/************************************************************************
 함수명 : valiChkAll
 설 명 : input 태그 등의 파라미터로 사용여부 분기 (허용치가 높은 순으로 파라미터 생성)
 인 자 : that(태그 자기 자신),num(숫자),en(영문),kr(한글),ex(특수),sp(공백)
@@ -52,6 +32,30 @@ function valiChkAll(that,num,en,kr,ex,sp){
 	}
 }
 
+
+/************************************************************************
+함수명 : pwReg
+설 명 : 비밀번호 정규식(유효성 검사)
+인 자 : pwVal(받아온 비밀번호 값)
+사용법 : 비밀번호 형식 체크할 때
+(형식 달라질 때마다 정규식 핸들링 필요)
+작성일 : 2024-04-08
+작성자 : 기술연구소 정다빈
+수정일        수정자       수정내용
+----------- ------ -------------------
+2024-04-08   정다빈       최초작성
+************************************************************************/
+function pwReg(inputVal){
+	var rst=true;
+	let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
+	if( !reg.test(inputVal) ) {
+		alert("비밀번호 형식에 위배됩니다.(영문+특수+숫자 8~15자)");
+		rst= false;
+		return rst;
+	}
+	return rst;
+}
+
 /*############################# old #############################*/
 
 /************************************************************************
@@ -65,35 +69,29 @@ function valiChkAll(that,num,en,kr,ex,sp){
 ----------- ------ -------------------
 2020.07.30   정다빈       최초작성
 ************************************************************************/
-function boardWriteCheck(form) {
+function idPwChk(form) {
+	var rst=true;
+	
 	//특수문자 정규식
 	var regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/gi;
 	
-	$(form).find('span').text("");	
-	
 	for (var i = 0; i < form.length; i++) {
-		//id의 경우 6자 이상인지
-		if(form[i].name =='USER_ID'|| form[i].name =='userId'){
-			if(form[i].value.length<6){
-				alert("id는 6자 이상으로 작성바랍니다");
-				form[i].focus();
-				return false;
-			}
-		}
 		//pw : (영문 특수문자 포함 8자이상 10자 이하)
-		if(form[i].name =='USER_PW'|| form[i].name =='userId'){
-			if(pwReg(form[i].value)){
+		if(form[i].name =='USER_PW' && form[i].value != ''){
+			if(!pwReg(form[i].value)){
 				form[i].focus();
-				return false;
+				rst= false;
+				return rst;
 			}
 		}
 	}
 	//확인 비밀번호와 비밀번호가 다를 때
 	if($("#userPw1").val()!=$("#userPw2").val()){
 		alert("비밀번호가 서로 일치하지 않습니다.");
-		return false;
+		rst= false;
+		return rst;
 	}
-	return true;
+	return rst;
 }
 
 /************************************************************************
@@ -149,6 +147,7 @@ function removeChar(event) {
 2020.08.25   정다빈       최초작성
 ************************************************************************/
 function telChk() {
+	var rst=true;
 	//부분 전화번호에 하나라도 값 기입시
 	if($("#userPhone2").val().length>0 || $("#userPhone3").val().length>0){
 		//1,2,3번째가 지정 자리수 이상일때만 값 주입
@@ -157,12 +156,13 @@ function telChk() {
 			$("#userPhone").val(phone);
 		}else{
 			alert("전화번호 형식이 올바르지 않습니다.");
-			return false;
+			rst=false;
+			return rst;
 		}
 	}else{
 		$("#userPhone").val("");
 	}
-	return true;
+	return rst;
 }
 
 /************************************************************************
@@ -220,7 +220,7 @@ function spaceChk(obj){//공백입력방지
 2024.04.08   정다빈       기능에 맞게 재작성
 *************************************************************************/
 function schChkKey(tagName,alt){
-	var res=true;
+	var rst=true;
 	
 	var inputVal = $("input[name="+tagName+"]").val();
 	
@@ -242,15 +242,17 @@ function schChkKey(tagName,alt){
 				if(typeof alt !=="undefined" && alt !=''){
 					alert("사용 가능한 id입니다.");
 				}
-				res=true;
+				rst=true;
+				return rst;
 			}else{//db에 값 존재
 				alert("이미 사용중인 id입니다.");
-				res=false;
+				rst=false;
+				return rst;
 			}
 		}
 
 	}
 	
 
-	return res;
+	return rst;
 }

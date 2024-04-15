@@ -18,7 +18,7 @@
 
 <script>
 	var updUrl="/admin/support/request/reqUpdate.do";
-	var delUrl="/admin/support/request/reqDelete.ajax";
+	var delUrl="/admin/support/request/reqDelete.do";
 	var delbak="/admin/support/request/reqList.do";
 	
 	$(document).ready( function() {
@@ -94,7 +94,7 @@
 			var tagId = $(this).parent().children().first().text();
 			$(this).attr('id');
 			if(tagId!="chkTd"){
-				$("#work").load("/admin/support/request/reqDetail.do",{"REQ_ID":tagId}); 
+				location.href="/admin/support/request/reqDetail.do?REQ_ID="+tagId; 
 			}
 		});
 

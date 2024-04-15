@@ -251,7 +251,7 @@ public class UserController {
 	}
 	
 	//사용자 수정 반영
-	@RequestMapping(value="/admin/auth/user/userUpdate.ajax")
+	@RequestMapping(value="/user/userUpdate.ajax")
 	public @ResponseBody ModelAndView userUpdateForm( @ModelAttribute("userVO") UserVO userVO,HttpServletRequest request) throws Exception{
 		logger.debug("▶▶▶▶▶▶▶.회원정보 수정!!!!!!!!!!!!!!!!");
 		
@@ -289,6 +289,5 @@ public class UserController {
 		}
 		return mav;
 	}
-/////////////////////
 	
 }
