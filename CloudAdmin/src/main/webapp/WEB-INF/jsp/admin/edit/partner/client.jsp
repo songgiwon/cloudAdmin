@@ -31,7 +31,11 @@ $(document).ready(function() {
 		if(i==0){
 			divContents+="<ul style='padding: 0 70px 0 0;'>"
 		}
-		divContents+="<li class=''><a><figure id="+ajaxData[i].PARTNER_ID+" onclick='show_popup_detail(this)'><img src='/resources"+ajaxData[i].file_DIR+ajaxData[i].file_NAME+"' alt='' title=''></figure></a></li>"
+		divContents+=
+			"<li class=''><a>"
+				+"<figure id="+ajaxData[i].PARTNER_ID+" onclick='show_popup_detail(this)'>"
+					+"<img src='/share/resources"+ajaxData[i].file_DIR+ajaxData[i].file_NAME+"' alt='' title=''>"
+				+"</figure></a></li>"
 		if(i==ajaxData.length-1){
 			divContents+="</ul>"
 		}
