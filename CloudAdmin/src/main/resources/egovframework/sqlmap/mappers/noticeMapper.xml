@@ -96,7 +96,10 @@
 		SELECT 
 		CONCAT(
 			'NT'
-			,LPAD(IFNULL(MAX( SUBSTR(NOTICE_ID,3,2) ),-1)+1,2,'0')
+			,LPAD(IFNULL(
+			MAX( 
+			CAST(SUBSTR(NOTICE_ID,3,2) AS UNSIGNED)
+			),-1)+1,2,'0')
 			,DATE_FORMAT(CURDATE(),'%Y%m%d')
 		) 
 		FROM NOTICE_info a

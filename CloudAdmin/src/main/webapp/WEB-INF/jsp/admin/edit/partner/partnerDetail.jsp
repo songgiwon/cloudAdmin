@@ -80,7 +80,7 @@
            <div>
 				<li style="list-style-type: none;"><a>
 					<figure id='${data.PARTNER_ID }'>
-						<img src='/resources${data.FILE_DIR}${data.FILE_NAME }'alt='' style='height: 100px;'>
+						<img src='/share/resources${data.FILE_DIR}${data.FILE_NAME }'alt='' style='height: 100px;'>
 					</figure>
 				</a></li>
            </div>

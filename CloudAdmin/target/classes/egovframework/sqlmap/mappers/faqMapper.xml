@@ -86,10 +86,10 @@
 	<select id="creFaqId" parameterType="faqVo" resultType="java.lang.String">
 		SELECT 
 		CONCAT(
-			'FAQ'
-			,IFNULL(MAX( SUBSTRING_INDEX(FAQ_ID, 'FAQ', -1) ),1)+1
+			'FAQ',IFNULL(MAX( CAST(SUBSTRING_INDEX(FAQ_ID, 'FAQ', -1) AS UNSIGNED) ),1)+1
 		)
-		FROM FAQ_INFO
+		FROM faq_info	
+		
 	</select>
 
 	<!-- 사용자 등록 -->
