@@ -80,7 +80,7 @@
 		<div id="contents" class="contents-wrap">
 			<!-- work Start -->
 			<div id="work" class="work-wrap">
-			<form name="insertForm" id="acDetailFrm" method="post"  action="/admin/support/request/insertReq.ajax"  enctype="multipart/form-data">
+			<form name="insertForm" id="acDetailFrm" method="post"  action="/admin/support/request/reqList.do"  enctype="multipart/form-data">
                 <!-- contents_box Start -->
                 <div id="contents_box" class="contents_box">
                     <!-- 컨텐츠 테이블 헤더 Start -->
