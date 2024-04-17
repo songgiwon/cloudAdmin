@@ -22,9 +22,11 @@
 		            dataType: "json",
 		            //contentType: "application/x-www-form-urlencoded; charset=euc-kr",
 		            data : frm,
+		            async : false,
 		            success: function(res){
 		                if(res.cnt > 0){
 		                    alert("저장되었습니다.");
+		                    location.href='/admin/support/request/reqList.do';
 		                } else {
 		                	if(res.badFileType != null){
 		                		alert("사진파일 첨부는 이미지 파일만 가능합니다.")
@@ -78,7 +80,7 @@
 		<div id="contents" class="contents-wrap">
 			<!-- work Start -->
 			<div id="work" class="work-wrap">
-			<form name="insertForm" id="acDetailFrm" method="post"  action="/admin/support/request/reqList.do"  enctype="multipart/form-data">
+			<form name="insertForm" id="acDetailFrm" method="post"  action="/admin/support/request/insertReq.ajax"  enctype="multipart/form-data">
                 <!-- contents_box Start -->
                 <div id="contents_box" class="contents_box">
                     <!-- 컨텐츠 테이블 헤더 Start -->

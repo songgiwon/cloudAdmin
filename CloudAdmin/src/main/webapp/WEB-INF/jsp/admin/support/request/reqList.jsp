@@ -197,6 +197,12 @@
 									<input type="checkbox" name="searchChk" id="chk_status2" value="2" checked>
 									<span class="checkmark"></span>
 								</label>
+								
+								<label class="fm_checkbox">
+									<span class="langSpan">답변종료</span>
+									<input type="checkbox" name="searchChk" id="chk_status2" value="3" checked>
+									<span class="checkmark"></span>
+								</label>
 
 							</div>
 						</div>

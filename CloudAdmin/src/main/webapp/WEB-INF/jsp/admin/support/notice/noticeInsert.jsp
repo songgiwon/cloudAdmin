@@ -22,6 +22,7 @@
 		            dataType: "json",
 		            //contentType: "application/x-www-form-urlencoded; charset=euc-kr",
 		            data : frm,
+		            async : false,
 		            success: function(res){
 		                if(res.cnt > 0){
 		                    alert("저장되었습니다.");
@@ -77,7 +78,7 @@
 			<!-- work Start -->
 			<div id="work" class="work-wrap">
 			<!-- action="/admin/support/notice/noticeList.do" -->
-			<form name="insertForm" id="acDetailFrm" method="post" action="return false"  enctype="multipart/form-data">
+			<form name="insertForm" id="acDetailFrm" method="post" action="/admin/support/notice/noticeList.do"  enctype="multipart/form-data">
                 <!-- contents_box Start -->
                 <div id="contents_box" class="contents_box">
                     <!-- 컨텐츠 테이블 헤더 Start -->

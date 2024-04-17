@@ -22,6 +22,7 @@
 				dataType : "json",
 				//contentType: "application/x-www-form-urlencoded; charset=euc-kr",
 				data : frm,
+				async : false,
 				success : function(res) {
 					if (res.cnt > 0) {
 						alert("저장되었습니다.");

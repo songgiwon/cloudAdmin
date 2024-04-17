@@ -112,7 +112,9 @@ public class NoticeController{
 		ModelAndView mav = new ModelAndView("jsonView");
 		try {
 			//엔터처리
-			inputVo.setCONTENT(inputVo.getCONTENT().replace("\r\n","<br>"));
+			if(inputVo.getCONTENT()!=null) {
+				inputVo.setCONTENT(inputVo.getCONTENT().replace("\r\n","<br>"));
+			}
 			//작성자는 로그인 사용자로
 			// 현재 세션에 대해 로그인한 사용자 정보를 가져옴
 			UserVO nlVo = (UserVO) request.getSession().getAttribute("login");
@@ -155,7 +157,9 @@ public class NoticeController{
 		try {
 			inputVo = noticeService.selectOne(thvo);
 			logger.debug("▶▶▶▶▶▶▶.결과값들:"+inputVo);
-			inputVo.setCONTENT(inputVo.getCONTENT().replace("<br>","\r\n"));
+			if(inputVo.getCONTENT()!=null) {
+				inputVo.setCONTENT(inputVo.getCONTENT().replace("<br>","\r\n"));
+			}
 			
 			fvo.setFILE_ORIGIN(inputVo.getNOTICE_ID());
 			fileList=fileService.selectFileList(fvo);
@@ -181,7 +185,9 @@ public class NoticeController{
 		ModelAndView mav = new ModelAndView("jsonView");
 		try {
 			//엔터처리
-			inputVo.setCONTENT(inputVo.getCONTENT().replace("\r\n","<br>"));
+			if(inputVo.getCONTENT()!=null) {
+				inputVo.setCONTENT(inputVo.getCONTENT().replace("\r\n","<br>"));
+			}
 			//작성자는 로그인 사용자로
 			// 현재 세션에 대해 로그인한 사용자 정보를 가져옴
 			UserVO nlVo = (UserVO) request.getSession().getAttribute("login");

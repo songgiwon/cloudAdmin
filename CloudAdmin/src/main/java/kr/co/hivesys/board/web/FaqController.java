@@ -94,7 +94,9 @@ public class FaqController {
 		ModelAndView mav = new ModelAndView("jsonView");
 		try {
 			//엔터처리
-			inputVo.setCONTENT(inputVo.getCONTENT().replace("\r\n","<br>"));
+			if(inputVo.getCONTENT()!=null) {
+				inputVo.setCONTENT(inputVo.getCONTENT().replace("\r\n","<br>"));
+			}
 			//작성자는 로그인 사용자로
 			// 현재 세션에 대해 로그인한 사용자 정보를 가져옴
 			UserVO nlVo = (UserVO) request.getSession().getAttribute("login");
@@ -144,7 +146,9 @@ public class FaqController {
 		ModelAndView mav = new ModelAndView("jsonView");
 		try {
 			//엔터처리
-			inputVo.setCONTENT(inputVo.getCONTENT().replace("\r\n","<br>"));
+			if(inputVo.getCONTENT()!=null) {
+				inputVo.setCONTENT(inputVo.getCONTENT().replace("\r\n","<br>"));
+			}
 			int cnt=faqService.update(inputVo);
 			mav.addObject("cnt", cnt);
 		} catch (Exception e) {

@@ -86,7 +86,9 @@ public class EditController {
     public ModelAndView touInsert( @ModelAttribute("editVo") EditVo thvo, HttpServletRequest request) throws Exception{
 		url = request.getRequestURI().substring(request.getContextPath().length()).split(".do")[0];
 		ModelAndView mav = new ModelAndView("jsonView");
-        thvo.setTEXT_VAL(thvo.getTEXT_VAL().replace("\r\n","<br>"));
+		if(thvo.getTEXT_VAL()!=null) {
+			thvo.setTEXT_VAL(thvo.getTEXT_VAL().replace("\r\n","<br>"));
+		}
         try {
 			if (url.contains("privacySvc")) {
 				thvo.setDOCUMENT_DIV("1");

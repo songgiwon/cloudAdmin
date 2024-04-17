@@ -118,8 +118,9 @@ public class ReqController{
 		try {
 			//현재 세션에 대해 로그인한 사용자 정보를 가져옴
 			UserVO nlVo = (UserVO) request.getSession().getAttribute("login");
-			
-			inputVo.setREQ_QUESTION(inputVo.getREQ_QUESTION().replace("\r\n","<br>"));
+			if(inputVo.getREQ_QUESTION()!=null) {
+				inputVo.setREQ_QUESTION(inputVo.getREQ_QUESTION().replace("\r\n","<br>"));
+			}
 			inputVo.setCOMPANY_ID(nlVo.getCOMPANY_ID());
 			inputVo.setREQ_ID(qnaService.creReqId(inputVo));
 			inputVo.setINSERT_TYPE("1");
@@ -165,7 +166,9 @@ public class ReqController{
 			userList = userService.selectAdmin();
 			fvo.setFILE_ORIGIN(inputVo.getREQ_ID());
 			fileList=fileService.selectFileList(fvo);
-			reqVo.setREQ_QUESTION(reqVo.getREQ_QUESTION().replace("<br>","\r\n"));
+			if(reqVo.getREQ_QUESTION()!=null) {
+				reqVo.setREQ_QUESTION(reqVo.getREQ_QUESTION().replace("<br>","\r\n"));
+			}
 			
 			mav.addObject("reqVo", reqVo);
 			mav.addObject("userList", userList);
@@ -256,7 +259,9 @@ public class ReqController{
 			for (int i = 0; i < ansList.size(); i++) {
 				QnaVo upvo = new QnaVo(); 
 				upvo = ansList.get(i);
-				upvo.setREQ_ANSWER(upvo.getREQ_ANSWER().replace("<br>","\r\n"));
+				if(upvo.getREQ_ANSWER()!=null) {
+					upvo.setREQ_ANSWER(upvo.getREQ_ANSWER().replace("<br>","\r\n"));
+				}
 				ansList.set(i, upvo);
 			}
 			List<FileVo> fileList = qnaService.ansFileList(inputVo);

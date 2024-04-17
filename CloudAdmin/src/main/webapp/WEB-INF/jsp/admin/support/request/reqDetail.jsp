@@ -27,13 +27,22 @@
 			$("#ansList").hide();
 			$("#anslist_show").show();
 		});
-		
-		$("#btnSet").on("click",function(){
+		//담당자배정 ,답변 종료하기
+		$("#btnSet ,#btnEnd").on("click",function(){
+			$("#REQ_STATUS").val($(this).val());
 			let frm = $("#acDetailFrm").serialize();
-			ajaxMethod('/admin/support/request/reqAnsUser.ajax',frm);
-			location.href='/admin/support/request/reqList.do';
+			if($(this).val()==3){//종료하기일경우
+				if(confirm("답변을 종료하시겠습니까? \n (주의 : 종료시에는 답변을 작성하실 수 없습니다)")==true){
+					ajaxMethod('/admin/support/request/reqAnsUser.ajax',frm);
+					location.href='/admin/support/request/reqList.do';		
+				}
+			}else{
+				ajaxMethod('/admin/support/request/reqAnsUser.ajax',frm);
+				location.href='/admin/support/request/reqList.do';	
+			}
 		});
 		
+		//답변하기 1 -> 2
 		$("#acDetailFrm").submit(function(e){
 			console.log("문의하기 상세 업데이트");
 			let frm = $("#acDetailFrm").serialize();
@@ -42,6 +51,7 @@
 	            type:"post",
 	            dataType: "json",
 	            data : frm,
+	            async : false,
 	            //contentType: "application/x-www-form-urlencoded; charset=euc-kr",
 	            success: function(res){
 	                if(res.cnt > 0){
@@ -103,10 +113,10 @@
 </div>
 <!-- 컨텐츠 테이블 헤더 End -->
 <!-- 컨텐츠 테이블 영역 Start -->
-<form name="insertForm" id="acDetailFrm" method="post"  action="/admin/support/request/reqList.do" enctype="multipart/form-data">
+<form name="insertForm" id="acDetailFrm" method="post"  action='/admin/support/request/reqList.do' enctype="multipart/form-data">
 <div class="ctn_tbl_area">
 	<input type="hidden" class="input_base" id="REQ_DIV" name="REQ_DIV" value="1"/>
-	 
+	<input type="hidden" class="input_base" id="REQ_STATUS" name="REQ_STATUS" value=""/>
 	<div class="ctn_tbl_row">
 	    <div class="ctn_tbl_th">문의번호</div>
 	    <div class="ctn_tbl_td">
@@ -176,42 +186,43 @@
 			</div>
 			<div id="ansList" style="display:none;"></div>
 		</div>       
-		                                        
-		<div class="ctn_tbl_row">
-		    <div class="ctn_tbl_th fm_rep">답변</div>
-		    <div class="ctn_tbl_td">
-		        <textarea id="REQ_ANSWER" name="REQ_ANSWER" class="long-cont" style="height:200px;" required></textarea>
-		    </div>
-		</div>
-		
-		<div class="ctn_tbl_row">
-			<div class="ctn_tbl_th">파일첨부</div>
-			<div class="ctn_tbl_td">
-				<input type="file" name="multiFile" multiple> 
-				※ 첨부파일은 3개월 후 자동 삭제 됩니다 (첨부파일은 총 5MB 이내)
+		<c:if test="${reqVo.REQ_STATUS==1 || reqVo.REQ_STATUS==2}">                             
+			<div class="ctn_tbl_row">
+			    <div class="ctn_tbl_th fm_rep">답변</div>
+			    <div class="ctn_tbl_td">
+			        <textarea id="REQ_ANSWER" name="REQ_ANSWER" class="long-cont" style="height:200px;" required></textarea>
+			    </div>
 			</div>
-		</div>
-		<div class="ctn_tbl_row">
-			<div class="ctn_tbl_th fm_rep">답변유형</div>
-		    <div class="ctn_tbl_td">
-				<label for="ans0" class="fm_radio" ><input type="radio" class="form_control" id="ans0" name="ANS_TYPE" value="0" checked/>
-					<span class="checkmark"></span><span class="langSpan">일반답변</span>
-				</label>
-				<label for="ans1" class="fm_radio" ><input type="radio" class="form_control" id="ans1" name="ANS_TYPE" value="1"/>
-					<span class="checkmark"></span><span class="langSpan">중간답변</span>
-				</label>
-		    </div>		
-		    
-		    <div class="ctn_tbl_th fm_rep">중요도</div>
-		    <div class="ctn_tbl_td">
-				<select class="form-control mw_50"  style="width:120px;" id="areaCodeSel" name="REQ_IMPORTANT">
-					<option value="2">상</option>
-					<option value="1">중</option>
-					<option value="0">하</option>
-				</select>
+		
+			<div class="ctn_tbl_row">
+				<div class="ctn_tbl_th">파일첨부</div>
+				<div class="ctn_tbl_td">
+					<input type="file" name="multiFile" multiple> 
+					※ 첨부파일은 3개월 후 자동 삭제 됩니다 (첨부파일은 총 5MB 이내)
+				</div>
+			</div>
+			<div class="ctn_tbl_row">
+				<div class="ctn_tbl_th fm_rep">답변유형</div>
+			    <div class="ctn_tbl_td">
+					<label for="ans0" class="fm_radio" ><input type="radio" class="form_control" id="ans0" name="ANS_TYPE" value="0" checked/>
+						<span class="checkmark"></span><span class="langSpan">일반답변</span>
+					</label>
+					<label for="ans1" class="fm_radio" ><input type="radio" class="form_control" id="ans1" name="ANS_TYPE" value="1"/>
+						<span class="checkmark"></span><span class="langSpan">중간답변</span>
+					</label>
+			    </div>		
+			    
+			    <div class="ctn_tbl_th fm_rep">중요도</div>
+			    <div class="ctn_tbl_td">
+					<select class="form-control mw_50"  style="width:120px;" id="areaCodeSel" name="REQ_IMPORTANT">
+						<option value="2">상</option>
+						<option value="1">중</option>
+						<option value="0">하</option>
+					</select>
+			    </div>
 		    </div>
-	    </div>
-	 </c:if>
+		</c:if>
+	</c:if>
 	
 	<!-- search_box End -->
 	
@@ -219,24 +230,32 @@
 	<!-- grid_box End -->
 		
 	<div id="footer" class="footer-wrap">
-	       <div id="footer-inner" class="footer-inner">
-	           <!-- btn_box Start -->
+		<div id="footer-inner" class="footer-inner">
+	        <!-- btn_box Start -->
 	       <div class="btn_box">
 	           <div class="right">
 		           <c:choose>
-			           <c:when test="${reqVo.REQ_STATUS!=0}">
-							<button type="submit"  class="btn btn_primary" style="" id="btnSave" data-term="L.등록" title="등록"><span class="langSpan">답변하기</span></button>
+			           <c:when test="${reqVo.REQ_STATUS==0}">
+							<button type="button"  class="btn btn_primary" style="" id="btnSet" value="1"><span class="langSpan">담당자배정</span></button>
+			           </c:when>
+			           <c:when test="${reqVo.REQ_STATUS==1 || reqVo.REQ_STATUS==2}">
+							<button type="submit"  class="btn btn_primary" style="" id="btnSave" value="2"><span class="langSpan">답변하기</span></button>
+							<c:if test="${reqVo.REQ_STATUS==2}">
+								<button type="button"  class="btn btn_primary" style="" id="btnEnd" value="3"><span class="langSpan">답변 종료</span></button>
+							</c:if>
 			           </c:when>
 			           <c:otherwise>
-							<button type="submit"  class="btn btn_primary" style="" id="btnSet" data-term="L.등록" title="등록"><span class="langSpan">담당자배정</span></button>
+							<button type="button"  class="btn btn_primary" style="background:darkgray; color:lightgray;" ><span class="langSpan">답변 완료</span></button>
 			           </c:otherwise>
 		           </c:choose>
+					
 					<button type="button" class="btn" id="btnList" onclick="history.back();" alt="저장" value="저장"><span class="langSpan">목록으로</span></button>
 	            </div>
 	        </div>
+			<!-- btn_box End -->
 	    </div>
 	</div>
-	<!-- btn_box End -->
+	<!-- footer End -->
 </div>
 </form>
 			            </div>
