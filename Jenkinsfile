@@ -40,7 +40,7 @@ pipeline {
         stage('Deploy Admin') {
             steps {
                 script {
-                    build job: 'pipeline_admin', wait: true
+                    build job: 'pipeline_admin'
                 }
             }
         }
