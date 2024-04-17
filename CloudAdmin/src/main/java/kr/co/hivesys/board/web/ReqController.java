@@ -215,8 +215,9 @@ public class ReqController{
 			//현재 세션에 대해 로그인한 사용자 정보를 가져옴
 			UserVO nlVo = (UserVO) request.getSession().getAttribute("login");
 			inputVo.setUSER_ID(nlVo.getUSER_ID());
-			
-			inputVo.setREQ_ANSWER(inputVo.getREQ_ANSWER().replace("\r\n","<br>"));
+			if(inputVo.getREQ_ANSWER()!=null) {
+				inputVo.setREQ_ANSWER(inputVo.getREQ_ANSWER().replace("\r\n","<br>"));
+			}
 			inputVo.setANS_ID(qnaService.creAnsId(inputVo));
 			inputVo.setREQ_STATUS("2");
 			/*파일 업로드 관련*/
@@ -243,7 +244,7 @@ public class ReqController{
 		return mav;
 	}
 	//답변+파일리스트 가져오기
-	@RequestMapping(value="/admin/support/request/ansHistoryList.ajax")
+	@RequestMapping(value="/request/ansHistoryList.ajax")
 	public @ResponseBody ModelAndView ansHistoryList( 
 			HttpServletRequest request
 			,@ModelAttribute("qnaVo") QnaVo inputVo) throws Exception{
