@@ -85,16 +85,25 @@
 	                   ${data.PROJECT_NAME}
 	               </div>
 	           </div>
+	           
 				<div class="ctn_tbl_row">
 				     <div class="ctn_tbl_th fm_rep">보고서유형</div>
 				     <div class="ctn_tbl_td">
 				         ${data.REPORT_TYPE_NM}
 				    </div>
 				</div>
+				
 				<div class="ctn_tbl_row">
 				     <div class="ctn_tbl_th fm_rep">고객사</div>
 				     <div class="ctn_tbl_td">
 				         ${data.COMPANY_NAME}
+				    </div>
+				</div>
+				
+				<div class="ctn_tbl_row">
+				     <div class="ctn_tbl_th fm_rep">작성자</div>
+				     <div class="ctn_tbl_td">
+				         ${data.USER_NAME}
 				    </div>
 				</div>
 		                  

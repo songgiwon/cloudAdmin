@@ -21,7 +21,11 @@
 		var tagId = $(that).attr("id");
 		$(this).attr('id');
 		if(tagId!="chkTd"){
-			location.href="/admin/edit/content/touDetail.do?DOCUMENT_ID="+tagId; 
+			//location.href="/admin/edit/content/touDetail.do?DOCUMENT_ID="+tagId; 
+		    var popUrl = "/admin/edit/content/touDetail.do?DOCUMENT_ID="+tagId;
+		    var popName = "이용약관 상세";
+		    var popOption = "width = 1100, height = 700, top = 100, left = 10, location = no";
+		    popupMethod(popUrl,popName,popOption);
 		}
 	}
 	//삭제

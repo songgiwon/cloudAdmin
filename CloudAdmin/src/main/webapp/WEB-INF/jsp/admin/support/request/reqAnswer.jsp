@@ -82,7 +82,7 @@
                             <div class="ctn_tbl_th">파일첨부</div>
                             <div class="ctn_tbl_td">
 								<input type="hidden" class="input_base" id="CLIENT_FILE" name="CLIENT_FILE" value="${reqVo.CLIENT_FILE}" style="width:307px;" readonly />
-								<input type="file" class="input_base" id="file" name="file" onchange="changePicture($(this));" style="width:377px; height: 20px;" />
+								<input type="file" class="input_base" id="file" name="file" style="width:377px; height: 20px;" />
 								※ 첨부파일은 3개월 후 자동 삭제 됩니다 (첨부파일은 총 5MB 이내)
                             </div>
                         </div>

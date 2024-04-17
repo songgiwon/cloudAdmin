@@ -103,7 +103,7 @@
 			<div class="ctn_tbl_row">
 				<div class="ctn_tbl_th">고객사</div>
 				<div class="ctn_tbl_td">
-					<select class="form-control mw_50"  style="width:120px;" id="areaCodeSel" name="ANS_USER">
+					<select class="form-control mw_50"  style="width:120px;" id="areaCodeSel" name="COMPANY_ID">
 					    <c:forEach var="cVo" items="${companyList}">
 							<option value="${cVo.COMPANY_ID}"  
 								<c:if test="${cVo.COMPANY_ID == data.COMPANY_ID}">selected</c:if>

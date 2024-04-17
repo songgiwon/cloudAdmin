@@ -25,39 +25,39 @@
 </script>
 </head>
 <body class="open">
-    <!-- lnb Start ------------------>
+<!--     lnb Start ----------------
     <aside id="lnb" class="lnb">
         <a class="lnb-control" title="메뉴 펼침/닫침"><span class="menu-toggle">메뉴 펼침/닫침</span></a>
         <nav id="navbar" class="navbar navbar-expand-sm navbar-default">
             <ul class="menu-inner"></ul>
         </nav>
     </aside>
-    <!-- lnb End ------------------>
+    lnb End ----------------
 
-    <!-- container Start ------------------>
+    container Start ----------------
     <div id="container" class="container-wrap">
-		<!-- header Start ------------------>
+		header Start ----------------
 		<div id="header" class="header-wrap"></div>
 		
 		<div id="title" class="title-wrap">
 			<div class="title-inner">
 			</div>
 		</div>
-		<!-- title end -->
-		<!-- contents Start ------------------>
+		title end
+		contents Start ----------------
 		<div id="contents" class="contents-wrap">
-			<!-- work Start -->
-			<div id="work" class="work-wrap">
+			work Start
+			<div id="work" class="work-wrap"> -->
 	<div class="title">
 		<h3>이용약관 ${data.DOCUMENT_ID}</h3>
 	</div>
 	<div>
-		<textarea id="TEXT_VAL" class="long-cont" style="width: 75vw;height: 55vh;resize:none;" readonly>${data.TEXT_VAL}</textarea>
+		<textarea id="TEXT_VAL" class="long-cont" style="" readonly>${data.TEXT_VAL}</textarea>
 	</div>
 	
-	<div id="footer" class="footer-wrap">
+<!-- 	<div id="footer" class="footer-wrap">
         <div id="footer-inner" class="footer-inner">
-            <!-- btn_box Start -->
+            btn_box Start
             <div class="btn_box">
                 <div class="right">
                     <button class="btn" style="" id="btnList" ><span class="langSpan">목록으로</span></button>
@@ -67,10 +67,10 @@
         </div>
     </div>
            </div>
-			<!-- work End -->
+			work End
         </div>
-		<!-- contents End ------------------>
-    </div>
+		contents End ----------------
+    </div> -->
     <!-- container End ------------------>
 </body>
 </html>

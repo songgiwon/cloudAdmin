@@ -100,6 +100,14 @@
 								</label>
                             </div>
                         </div>
+                        
+                        <div class="ctn_tbl_row">
+                            <div class="ctn_tbl_th fm_rep">작성자</div>
+                            <div class="ctn_tbl_td">
+                                ${data.USER_NAME}
+                            </div>
+                        </div>
+                        
 						<div class="ctn_tbl_row">
                             <div class="ctn_tbl_th fm_rep">제목</div>
                             <div class="ctn_tbl_td">

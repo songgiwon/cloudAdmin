@@ -127,7 +127,7 @@
                         <div class="btn_box">
                             <div class="right">
 			                    <button class="btn btn_primary" style="" id="btnSave" data-term="L.등록" title="등록"><span class="langSpan">등록</span></button>
-					             <button class="btn" id="btnList" data-term="L.목록" title="목록"
+					             <button class="btn" type="button" id="btnList" data-term="L.목록" title="목록"
 								onclick="location.href='/admin/support/faq/faqList.do'">
 								<span class="langSpan">취소</span></button>
 			                </div>

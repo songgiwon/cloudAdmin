@@ -121,7 +121,7 @@ public class ReportController{
 			//작성자는 로그인 사용자로
 			// 현재 세션에 대해 로그인한 사용자 정보를 가져옴
 			UserVO nlVo = (UserVO) request.getSession().getAttribute("login");
-			inputVo.setCOMPANY_ID(nlVo.getCOMPANY_ID());
+			inputVo.setUSER_ID(nlVo.getUSER_ID());
 			//id 생성
 			inputVo.setREPORT_ID(reportService.creReportId(inputVo));
 			
@@ -203,7 +203,7 @@ public class ReportController{
 			//작성자는 로그인 사용자로
 			// 현재 세션에 대해 로그인한 사용자 정보를 가져옴
 			UserVO nlVo = (UserVO) request.getSession().getAttribute("login");
-			inputVo.setCOMPANY_ID(nlVo.getCOMPANY_ID());
+			inputVo.setUSER_ID(nlVo.getUSER_ID());
 			
 			/*파일 업로드 관련*/
 			if(multiFileList.size()!=0) {

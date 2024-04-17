@@ -215,13 +215,32 @@ function chkArrValiF(objArr,chkVal){
 	return true;
 }
 
-/*파일 업로드 또는 다운로드 시*/
-/**
- * 사진 등록 또는 변경 시
- */
-function changePicture(obj){
-	console.log("사진 등록 또는 변경 시");
-	$(obj).parent().children().first().val((obj.val()).replace("C:\\fakepath\\", ""));
+/************************************************************************
+함수명 : popupMethod
+설 명 : 팝업창 띄움
+인 자 : 
+
+    var url = "popup.html";
+    var name = "popup test";
+    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+
+사용법 : 
+
+width		open되는 팝업 창의 너비를 지정
+height		open되는 팝업창의 높이를 지정
+left		open되는 팝업창의 x축 위치를 지정
+top			open되는 팝업창의 y축 위치를 지정
+scrollbars	팝업창의 scrollbar를 Visible 여부를 설정 (scrollbars = no or scrollbars = yes)
+location	팝업창의 URL 입력란을 Visible 여부를 설정 (location= no or location= yes)
+toolbars	팝업창의 도구상자를 Visible 여부를 설정 (toolbars= no or toolbars= yes)
+status		팝업창의 상태 표시줄을 Visible 여부를 설정 (status= no or status= yes)
+
+작성일 : 2024.04.15
+작성자 : 기술연구소 정다빈
+수정일        수정자       수정내용
+----------- ------ -------------------
+2024.04.15   정다빈       최초작성
+************************************************************************/
+function popupMethod(url,name,option){
+    window.open(url, name, option);
 }
-
-
