@@ -40,7 +40,7 @@ pipeline {
         stage('Deploy Admin') {
             steps {
                 script {
-                    build job: 'pipeline_admin'
+                    sh '/kwsong/web_a.sh'
                 }
             }
         }
