@@ -25,7 +25,6 @@
 					,PROJECT_NAME
 					,DATE_FORMAT(REG_DT,'%Y-%m-%d') AS REG_DT 
 					,USER_ID
-					,USER_NAME
 				FROM REPORT_INFO
 				WHERE 1=1
 				<!-- vo 필드값을 배열로 해서 조회하는 부분 -->
@@ -94,7 +93,6 @@
 					,PROJECT_NAME
 					,DATE_FORMAT(REG_DT,'%Y-%m-%d') AS REG_DT
 					,USER_ID
-					,USER_NAME
 			    FROM REPORT_INFO
 				 WHERE REPORT_ID=#{REPORT_ID}
 			)A
