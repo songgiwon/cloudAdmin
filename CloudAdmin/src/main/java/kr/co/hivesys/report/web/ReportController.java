@@ -155,7 +155,7 @@ public class ReportController{
 			,"/admin/report/reportUpdate.do"
 	})
 	public @ResponseBody ModelAndView detail( @ModelAttribute("ReportVo") ReportVo thvo,HttpServletRequest request) throws Exception{
-		logger.debug("▶▶▶▶▶▶▶.회원정보 조회 목록!!!!!!!!!!!!!!!!");
+		logger.debug("▶▶▶▶▶▶▶.보고서 등록 상세 수정 보기 !!!!!!!!!!!!!!!! : "+thvo);
 		url = request.getRequestURI().substring(request.getContextPath().length()).split(".do")[0];
 		List<CompanyVo> companyList = new ArrayList<>();
 		ModelAndView mav;
