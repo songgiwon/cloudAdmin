@@ -1,24 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 	<title>CLOUD 24 365 관리자 페이지</title>
 	<jsp:include page="/cmn/admin/top.do" flush="false" />
-	<!-- JS -->
-	<script src="<%=request.getContextPath()%>/js/jquery.js"></script>
-	<script src="<%=request.getContextPath()%>/js/jquery.migrate.js"></script>
- 	 
- 	 <!-- DateTimePicker -->
-	<script src="<%=request.getContextPath()%>/calender/moment.js"></script>
-	<script src="<%=request.getContextPath()%>/calender/mo_ko.js"></script>
-	<script src="<%=request.getContextPath()%>/calender/bootstrap-datetimepicker.js"></script>
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/calender/no-boot-calendar-custom.css" />
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/calender/datetimepickerstyle.css" />
- 	 
- 	 
 	<script>
 		$(document).ready(function() {
 			console.log("고객 수정 화면");
@@ -43,7 +35,38 @@
 				//저장 전 인덱스 맞춤
 				mspListVo($('#mspList'));
 				let queryString = $("#acDetailFrm").serialize();
-				ajaxMethod('/admin/client/company/companyUpdate.ajax',queryString,"/admin/client/company/companyList.do",'저장되었습니다');
+				//ajaxMethod('/admin/client/company/companyUpdate.ajax',queryString,"/admin/client/company/companyList.do",'저장되었습니다');
+				
+				console.log("문의하기 등록");
+				let frm = $("#acDetailFrm").serialize();
+				//let param = encodeURI(frm);
+			    var options = {
+		            url:'/admin/client/company/companyUpdate.ajax',
+		            type:"post",
+		            dataType: "json",
+		            //contentType: "application/x-www-form-urlencoded; charset=euc-kr",
+		            data : frm,
+		            success: function(res){
+		                if(res.cnt > 0){
+		                    alert("저장되었습니다.");
+		                    location.href="/admin/client/company/companyList.do"
+		                } else {
+		                	if(res.badFileType != null){
+		                		alert("올바른 확장자명인지 확인해주세요");
+		                	} else if(typeof res.createFileError !== "undefined" && res.createFileError) {
+		                	    alert("파일 저장에 실패했습니다.");
+		                	} else if(typeof res.msg !== "undefined" && res.msg != null) {
+		                		alert(res.msg);
+		                	} else {
+		                		alert("저장에 실패했습니다.");
+		                	}
+		                }
+		            } ,
+		            error: function(res,error){
+		                alert("에러가 발생했습니다."+error);
+		            }
+			    };
+			    $('#acDetailFrm').ajaxSubmit(options);
 			}); 
 			
 			//취소
@@ -80,7 +103,7 @@
 		<div id="contents" class="contents-wrap">
 			<!-- work Start -->
 			<div id="work" class="work-wrap">
-<form name="insertForm" id="acDetailFrm" method="post" action="/admin/client/company/companyList.do"  enctype="multipart/form-data">
+<form name="insertForm" id="acDetailFrm" method="post" action="return false"  enctype="multipart/form-data">
 	<div id="contents_box" class="contents_box">
 		<!-- 컨텐츠 테이블 헤더 Start -->
 		<div class="ctn_tbl_header">
@@ -295,7 +318,19 @@
 						<span class="langSpan">계약서</span>
 					</div>
 					<div class="ctn_tbl_td">
-						<input type="text" name="CONTRACT" class="form-control">
+						<input type="file" name="fCONTRACT" style="width: 77px;" multiple>
+						<c:choose>
+							<c:when test="${contractList.size()==0}">
+							</c:when>
+							<c:otherwise>
+								<select class="form-control mw_50"  style="width:120px;" id="fCONTRACT_S"  onchange="if(this.value) window.open(this.value);">
+									<option value="">첨부파일 ${contractList.size()}개</option>
+									<c:forEach var="fvo" items="${contractList}">
+										<option value="/download.ajax?FILE_ID=${fvo.FILE_ID}">${fvo.FILE_NAME}</option>
+									</c:forEach>
+								</select>						
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 				
@@ -328,9 +363,19 @@
 						<span class="langSpan">증빙 자료</span>
 					</div>
 					<div class="ctn_tbl_td">
-						<input type="text" name="EVIDENCE" class="form-control">
+						<input type="file" name="fEVIDENCE"  style="width: 77px;" multiple>
+						<c:choose>
+							<c:when test="${evidenceList.size()==0}"></c:when>
+							<c:otherwise>
+								<select class="form-control mw_50"  style="width:120px;" id="fEVIDENCE_S"  onchange="if(this.value) window.open(this.value);">
+									<option value="">첨부파일 ${evidenceList.size()}개</option>
+									<c:forEach var="fvo" items="${evidenceList}">
+										<option value="/download.ajax?FILE_ID=${fvo.FILE_ID}">${fvo.FILE_NAME}</option>
+									</c:forEach>
+								</select>						
+							</c:otherwise>
+						</c:choose>
 					</div>
-					
 				</div>
 				
 				<div class="ctn_tbl_row">

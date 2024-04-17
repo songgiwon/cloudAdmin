@@ -252,9 +252,20 @@
 					<span class="langSpan">계약서</span>
 				</div>
 				<div class="ctn_tbl_td">
-					<input type="text" name="CONTRACT" class="form-control" value="${data.CONTRACT}"   readonly/>
+					<c:choose>
+						<c:when test="${contractList.size()==0}">
+							첨부파일 없음
+						</c:when>
+						<c:otherwise>
+							<select class="form-control mw_50"  style="width:120px;" id="fCONTRACT_S"  onchange="if(this.value) window.open(this.value);">
+								<option value="">첨부파일 ${contractList.size()}개</option>
+								<c:forEach var="fvo" items="${contractList}">
+									<option value="/download.ajax?FILE_ID=${fvo.FILE_ID}">${fvo.FILE_NAME}</option>
+								</c:forEach>
+							</select>						
+						</c:otherwise>
+					</c:choose>
 				</div>
-				
 			</div>
 			
 			<div class="ctn_tbl_row">
@@ -287,7 +298,19 @@
 					<span class="langSpan">증빙 자료</span>
 				</div>
 				<div class="ctn_tbl_td">
-					<input type="text" name="EVIDENCE" class="form-control" value="${data.EVIDENCE}"   readonly/>
+					<c:choose>
+						<c:when test="${evidenceList.size()==0}">
+							첨부파일 없음
+						</c:when>
+						<c:otherwise>
+							<select class="form-control mw_50"  style="width:120px;" id="fEVIDENCE_S"  onchange="if(this.value) window.open(this.value);">
+								<option value="">첨부파일 ${evidenceList.size()}개</option>
+								<c:forEach var="fvo" items="${evidenceList}">
+									<option value="/download.ajax?FILE_ID=${fvo.FILE_ID}">${fvo.FILE_NAME}</option>
+								</c:forEach>
+							</select>						
+						</c:otherwise>
+					</c:choose>
 				</div>
 				
 			</div>

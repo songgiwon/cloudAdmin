@@ -15,9 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.hivesys.comm.file.FileUploadSave;
+import kr.co.hivesys.comm.file.service.FileService;
+import kr.co.hivesys.comm.file.vo.FileVo;
 import kr.co.hivesys.company.service.CompanyService;
 import kr.co.hivesys.company.vo.CompanyVo;
 import kr.co.hivesys.company.vo.MspVo;
@@ -33,6 +38,12 @@ public class CompanyController {
 	
 	@Resource(name="companyService")
 	private CompanyService companyService;
+	
+	@Resource(name="fileLogic")
+	private FileUploadSave fus;
+	
+	@Resource(name="fileService")
+	private FileService fileService;
 	
 	public String url="";
 	
@@ -92,7 +103,6 @@ public class CompanyController {
 		try {
 			// 현재 세션에 대해 로그인한 사용자 정보를 가져옴
 			UserVO nlVo = (UserVO) request.getSession().getAttribute("login");
-			
 			sList = companyService.selectCompanyList(thvo);
 			mav.addObject("data", sList);
 			mav.addObject("serviceCnt",companyService.serviceCnt(thvo));
@@ -126,11 +136,14 @@ public class CompanyController {
 	public ModelAndView insertComapny(HttpSession httpSession, 
 			HttpServletRequest request,Model model
 			,@ModelAttribute CompanyVo cmsVo
+			,@RequestPart(value = "fCONTRACT", required = false) List<MultipartFile> fCONTRACT
+			,@RequestPart(value = "fEVIDENCE", required = false) List<MultipartFile> fEVIDENCE
 			//,@RequestParam(required=false, value="mspList[]") List<MspVo> mspList
 			) throws Exception{
 		url = request.getRequestURI().substring(request.getContextPath().length()).split(".do")[0];
 		ModelAndView mav = new ModelAndView("jsonView");
 		try {
+			//msp
 			try {
 				
 				if(cmsVo.getMspList()!=null) {
@@ -142,7 +155,48 @@ public class CompanyController {
 				mav.addObject("msg","동일 클라우드일 경우에는 다른 요금제를 선택해주세요");
 				return mav;
 			}
-			companyService.insertCompany(cmsVo);
+			
+			try {/*계약서 업로드 관련*/
+				if(fCONTRACT.size()!=0) {
+					//화면에 따른 변경부분
+					//경로,원본id
+					String inputPath = "resources/contract/" +cmsVo.getCOMPANY_ID()+ "/";
+					String oriId = cmsVo.getCOMPANY_ID();
+					/*공통 적용 부분*/
+					FileVo fvo = new FileVo();
+					fvo.setFILE_DIR(inputPath);
+					fvo.setFILE_ORIGIN(oriId);
+					fus.fileUploadMultiple(fCONTRACT,fvo);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.debug("에러메시지 : "+e.toString());
+				mav.addObject("msg","계약서 업로드에 실패했습니다");
+				return mav;
+			}
+			
+			try {/*증빙서 업로드 관련*/
+				//if(fEVIDENCE.size()!=0) {
+				if(fEVIDENCE.size()!=0) {
+					//화면에 따른 변경부분
+					//경로,원본id
+					String inputPath = "resources/evidence/" +cmsVo.getCOMPANY_ID()+ "/";
+					String oriId = cmsVo.getCOMPANY_ID();
+					/*공통 적용 부분*/
+					FileVo fvo = new FileVo();
+					fvo.setFILE_DIR(inputPath);
+					fvo.setFILE_ORIGIN(oriId);
+					fus.fileUploadMultiple(fEVIDENCE,fvo);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.debug("에러메시지 : "+e.toString());
+				mav.addObject("msg","증빙서 업로드에 실패했습니다");
+				return mav;
+			}
+			
+			int cnt=companyService.insertCompany(cmsVo);
+			mav.addObject("cnt", cnt);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.debug("에러메시지 : "+e.toString());
@@ -168,9 +222,20 @@ public class CompanyController {
 			mspList = companyService.selectMspOne(mspvo);
 			
 			logger.debug("▶▶▶▶▶▶▶.시험코드 결과값들:"+inputVo);
+			//계약서 증빙서
+			FileVo fvo1 = new FileVo();
+			fvo1.setFILE_DIR("/contract/");
+			fvo1.setFILE_ORIGIN(thvo.getCOMPANY_ID());
+			FileVo fvo2 = new FileVo();
+			fvo2.setFILE_ORIGIN(thvo.getCOMPANY_ID());
+			fvo2.setFILE_DIR("/evidence/");
+			List<FileVo> contractList=fileService.selectFileList(fvo1);
+			List<FileVo> evidenceList=fileService.selectFileList(fvo2);
 			
 			mav.addObject("data", inputVo);
 			mav.addObject("mspList", mspList);
+			mav.addObject("contractList", contractList);
+			mav.addObject("evidenceList", evidenceList);
 			mav.setViewName(url);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -180,50 +245,15 @@ public class CompanyController {
 		return mav;
 	}
 
-
-	/*//검색한 id 조회
-	@RequestMapping(value="/client/setting/user/findUSER_ID.do")
-	public @ResponseBody ModelAndView findUSER_ID( @ModelAttribute("companyVO") CompanyVo thvo,HttpServletRequest request) throws Exception{
-		logger.debug("▶▶▶▶▶▶▶.회원정보 조회 목록!!!!!!!!!!!!!!!!");
-		
-		url = request.getRequestURI().substring(request.getContextPath().length()).split(".do")[0];
-		
-		ModelAndView mav = new ModelAndView("jsonView");
-		UserVO disUser= null;
-		try {
-			disUser = companyService.selectCompany(thvo);
-			mav.addObject("data", disUser.getUSER_ID());
-		} catch (Exception e) {
-			logger.debug("에러메시지 : "+e.toString());
-			mav.addObject("msg","search_not");
-		}
-		return mav;
-	}*/
-
-	//사용자 수정 페이지 진입
-	/*@RequestMapping(value="/admin/client/company/companyUpdate.do")
-	public @ResponseBody ModelAndView userUpdate( @ModelAttribute("companyVO") CompanyVo thvo,HttpServletRequest request) throws Exception{
-		logger.debug("▶▶▶▶▶▶▶.회원정보 조회 목록!!!!!!!!!!!!!!!!");
-		
-		url = request.getRequestURI().substring(request.getContextPath().length()).split(".do")[0];
-		
-		ModelAndView mav = new ModelAndView("jsonView");
-		CompanyVo inputVo= null;
-		try {
-			inputVo = companyService.selectCompany(thvo);
-			logger.debug("▶▶▶▶▶▶▶.결과값들:"+inputVo);
-			mav.addObject("data", inputVo);
-			mav.setViewName(url);
-		} catch (Exception e) {
-			e.printStackTrace();
-			logger.debug("에러메시지 : "+e.toString());
-		}
-		return mav;
-	}*/
 	
 	//사용자 수정 반영
 	@RequestMapping(value="/admin/client/company/companyUpdate.ajax")
-	public @ResponseBody ModelAndView userUpdateForm( @ModelAttribute("companyVO") CompanyVo thvo,HttpServletRequest request) throws Exception{
+	public @ResponseBody ModelAndView userUpdateForm( 
+			@ModelAttribute("companyVO") CompanyVo thvo
+			,HttpServletRequest request
+			,@RequestPart(value = "fCONTRACT", required = false) List<MultipartFile> fCONTRACT
+			,@RequestPart(value = "fEVIDENCE", required = false) List<MultipartFile> fEVIDENCE
+			) throws Exception{
 		logger.debug("▶▶▶▶▶▶▶.회원정보 수정!!!!!!!!!!!!!!!!");
 		
 		url = request.getRequestURI().substring(request.getContextPath().length()).split(".do")[0];
@@ -231,17 +261,60 @@ public class CompanyController {
 		ModelAndView mav = new ModelAndView("jsonView");
 		try {
 			try {
+				//msp 요금제 관련
 				if(thvo.getMspList()!=null) {
 					companyService.deleteMsp(thvo);
 					companyService.subListInsert(thvo.getMspList());
 				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				logger.debug("에러메시지 : "+e.toString());
 				mav.addObject("msg","동일 클라우드일 경우에는 다른 요금제를 선택해주세요");
 				return mav;
 			}
-			companyService.updateCompany(thvo);
+			
+			try {/*계약서 업로드 관련*/
+				if(fCONTRACT.size()!=0) {
+					//화면에 따른 변경부분
+					//경로,원본id
+					String inputPath = "resources/contract/" +thvo.getCOMPANY_ID()+ "/";
+					String oriId = thvo.getCOMPANY_ID();
+					/*공통 적용 부분*/
+					FileVo fvo = new FileVo();
+					fvo.setFILE_DIR(inputPath);
+					fvo.setFILE_ORIGIN(oriId);
+					fus.fileUploadMultiple(fCONTRACT,fvo);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.debug("에러메시지 : "+e.toString());
+				mav.addObject("msg","계약서 업로드에 실패했습니다");
+				return mav;
+			}
+			
+			try {/*증빙서 업로드 관련*/
+				//if(fEVIDENCE.size()!=0) {
+				if(fEVIDENCE.size()!=0) {
+					//화면에 따른 변경부분
+					//경로,원본id
+					String inputPath = "resources/evidence/" +thvo.getCOMPANY_ID()+ "/";
+					String oriId = thvo.getCOMPANY_ID();
+					/*공통 적용 부분*/
+					FileVo fvo = new FileVo();
+					fvo.setFILE_DIR(inputPath);
+					fvo.setFILE_ORIGIN(oriId);
+					fus.fileUploadMultiple(fEVIDENCE,fvo);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				logger.debug("에러메시지 : "+e.toString());
+				mav.addObject("msg","증빙서 업로드에 실패했습니다");
+				return mav;
+			}
+			
+			int cnt=companyService.updateCompany(thvo);
+			mav.addObject("cnt", cnt);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.debug("에러메시지 : "+e.toString());

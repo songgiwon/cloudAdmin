@@ -1,29 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
 	<title>CLOUD 24 365 관리자 페이지</title>
 	<jsp:include page="/cmn/admin/top.do" flush="false" />
-
-	<style>
-		
-	</style>
-
-	<!-- JS -->
-	<script src="<%=request.getContextPath()%>/js/jquery.js"></script>
-	<script src="<%=request.getContextPath()%>/js/jquery.migrate.js"></script>
- 	 
- 	 <!-- DateTimePicker -->
-	<script src="<%=request.getContextPath()%>/calender/moment.js"></script>
-	<script src="<%=request.getContextPath()%>/calender/mo_ko.js"></script>
-	<script src="<%=request.getContextPath()%>/calender/bootstrap-datetimepicker.js"></script>
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/calender/no-boot-calendar-custom.css" />
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/calender/datetimepickerstyle.css" />
- 	 
 	<script>
 		$(document).ready(function() {
 			console.log("고객 등록 화면");
@@ -48,11 +35,43 @@
 			});
 			
 			$("#acDetailFrm").submit(function(e){
+				event.preventDefault();
 				console.log("정보 저장");
+				//저장 전 인덱스 맞춤
 				mspListVo($('#mspList'));
 				let queryString = $("#acDetailFrm").serialize();
-				ajaxMethod('/admin/client/company/insertComapny.ajax',queryString,'/admin/client/company/companyList.do','저장되었습니다');
-				location.href='/admin/client/company/companyList.do';
+				//ajaxMethod('/admin/client/company/companyUpdate.ajax',queryString,"/admin/client/company/companyList.do",'저장되었습니다');
+				
+				console.log("문의하기 등록");
+				let frm = $("#acDetailFrm").serialize();
+				//let param = encodeURI(frm);
+			    var options = {
+		            url:'/admin/client/company/insertComapny.ajax',
+		            type:"post",
+		            dataType: "json",
+		            //contentType: "application/x-www-form-urlencoded; charset=euc-kr",
+		            data : frm,
+		            success: function(res){
+		                if(res.cnt > 0){
+		                    alert("저장되었습니다.");
+		                    location.href="/admin/client/company/companyList.do"
+		                } else {
+		                	if(res.badFileType != null){
+		                		alert("올바른 확장자명인지 확인해주세요");
+		                	} else if(typeof res.createFileError !== "undefined" && res.createFileError) {
+		                	    alert("파일 저장에 실패했습니다.");
+		                	} else if(typeof res.msg !== "undefined" && res.msg != null) {
+		                		alert(res.msg);
+		                	} else {
+		                		alert("저장에 실패했습니다.");
+		                	}
+		                }
+		            } ,
+		            error: function(res,error){
+		                alert("에러가 발생했습니다."+error);
+		            }
+			    };
+			    $('#acDetailFrm').ajaxSubmit(options);
 			}); 
 			
 			//y면 체크 아니면 비체크인데 비체크값을 n으로 변경
@@ -293,7 +312,7 @@
 									<span class="langSpan">계약서</span>
 								</div>
 								<div class="ctn_tbl_td">
-									<input type="text" name="CONTRACT" class="form-control">
+									<input type="file" name="fCONTRACT" style="width: 200px;" multiple>
 								</div>
 							</div>
 							
@@ -326,9 +345,8 @@
 									<span class="langSpan">증빙 자료</span>
 								</div>
 								<div class="ctn_tbl_td">
-									<input type="text" name="EVIDENCE" class="form-control">
+									<input type="file" name="fEVIDENCE" style="width: 200px;" multiple>
 								</div>
-								
 							</div>
 							
 							<div class="ctn_tbl_row">
