@@ -9,6 +9,8 @@
 2020.07.23 정다빈     최초 생성 
 -->
 
+	<!-- 청구서 -->
+		
 	<select id="selectList" parameterType="billVo" resultType="billVo">
 		SELECT * FROM BILL_FILE
 		ORDER BY REG_DT ASC    

@@ -18,37 +18,18 @@ public class ChargeServiceImpl implements ChargeService{
 	private ChargeMapper chargeMapper;
 	
 	@Override
-	public List<ChargeVo> selectList(ChargeVo inputVo) {
-		return chargeMapper.selectList(inputVo);
-	}
-	
-	@Override
-	public String crechargeId(ChargeVo inputVo) {
-		return chargeMapper.crechargeId(inputVo);
+	public List<ChargeVo> selectPriceList(ChargeVo thvo) {
+		return chargeMapper.selectPriceList(thvo);
 	}
 
 	@Override
-	public int insert(ChargeVo inputVo) {
-		return chargeMapper.insert(inputVo);
+	public int chargeInsert(ChargeVo thvo) {
+		return chargeMapper.chargeInsert(thvo);
 	}
 
 	@Override
-	public ChargeVo selectOne(ChargeVo inputVo) {
-		return chargeMapper.selectOne(inputVo);
+	public void deleteCharge() {
+		chargeMapper.deleteCharge();		
 	}
-
-	@Override
-	public int update(ChargeVo inputVo) {
-		return chargeMapper.update(inputVo);
-	}
-
-	@Override
-	public int delete(List<String> inputList) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("chkList",inputList);
-		return chargeMapper.delete(map);	
-	}
-
-
 	
 }

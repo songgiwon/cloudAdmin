@@ -52,4 +52,5 @@ public class BillServiceImpl implements BillService{
 	public int firstNumber(BillVo inputVo) {
 		return billMapper.firstNumber(inputVo);
 	}
+
 }

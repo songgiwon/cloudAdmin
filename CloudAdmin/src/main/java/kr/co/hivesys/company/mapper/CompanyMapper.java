@@ -35,4 +35,5 @@ public interface CompanyMapper {
 	void subListUpdate(List<MspVo> listArr);
 
 	void deleteMsp(CompanyVo cmsVo);
+
 }

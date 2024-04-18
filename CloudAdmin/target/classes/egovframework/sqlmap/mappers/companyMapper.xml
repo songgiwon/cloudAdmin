@@ -236,6 +236,7 @@
 			,BILL_DT
 			,BILL_RFDT
 			,TAX_DT
+			,REG_DT
 			
 			,RES_SALES
 			,RES_MANAGER
@@ -340,6 +341,7 @@
 			,#{BILL_DT}
 			,#{BILL_RFDT}
 			,#{TAX_DT}
+			,#{REG_DT}
 			
 			,#{RES_SALES}
 			,#{RES_MANAGER}

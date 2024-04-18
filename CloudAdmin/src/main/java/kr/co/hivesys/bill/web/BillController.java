@@ -39,6 +39,7 @@ import kr.co.hivesys.comm.file.FileUploadSave;
 import kr.co.hivesys.comm.file.service.FileService;
 import kr.co.hivesys.comm.file.vo.FileVo;
 import kr.co.hivesys.company.service.CompanyService;
+import kr.co.hivesys.company.vo.CompanyVo;
 import kr.co.hivesys.report.service.ReportService;
 import kr.co.hivesys.user.service.UserService;
 import kr.co.hivesys.user.vo.UserVO;
@@ -69,10 +70,10 @@ public class BillController{
 	List<BillVo> sList=  new ArrayList<>();
 	
 	//권한조회 후 최초 주소
-	@RequestMapping(value= "/admin/client/bill.do")
+	@RequestMapping(value= "/admin/edit/bill.do")
 	public String firstAuth(HttpSession httpSession, HttpServletRequest request,Model model
 			) throws Exception{
-		return "redirect:/admin/client/bill/billList.do";
+		return "redirect:/admin/edit/bill/billList.do";
 	}
 	
 	//문의하기 목록 조회

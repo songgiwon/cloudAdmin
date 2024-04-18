@@ -32,5 +32,5 @@ public interface CompanyService {
 	void subListUpdate(List<MspVo> listArr);
 	
 	void deleteMsp(CompanyVo cmsVo);
-	
+
 }

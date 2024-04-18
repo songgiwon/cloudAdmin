@@ -3,6 +3,7 @@ package kr.co.hivesys.bill.service;
 import java.util.List;
 
 import kr.co.hivesys.bill.vo.BillVo;
+import kr.co.hivesys.company.vo.CompanyVo;
 
 
 public interface BillService {
@@ -19,4 +20,5 @@ public interface BillService {
 	int delete(List<String> inputList);
 
 	int firstNumber(BillVo inputVo);
+	
 }
