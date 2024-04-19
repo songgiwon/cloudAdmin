@@ -47,18 +47,30 @@
 
 $(document).ready(function() {
 	console.log("top 참조화면");
+
+	var sessionVo = '${login.USER_ID}';
+	//로그인(세션) 여부를 판별하여 화면전환 (로그인/메인화면)
+	if(sessionVo==''){
+		console.log("로그인 세션X");//로그인 안되있음
+		alert("로그인이 필요한 서비스이므로 로그인 창으로 이동합니다");
+		logBfurl=location.href;
+		location.href="/login/loginPost.do";
+	}
+	
 	//메뉴 이벤트
 	document.querySelector(".lnb-control").addEventListener("click",function(){
         document.body.classList.toggle('open');
     });
+	
 	var nowUrl = location.href;
 	nowUrl=nowUrl.split("/")[4];
-	console.log(nowUrl);
+	//console.log(nowUrl);
 	//타이틀 부분
 	$(".title-inner").load("/admin/"+nowUrl+"/subTitle.do");
 	
 	$('#navbar').load("/cmn/admin/menu.do");
 	$('#header').load("/cmn/admin/header.do");
+	
 
 });
 

@@ -5,8 +5,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.HttpHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -43,7 +45,7 @@ public class MainController {
 	//url 뒤에 path 없는 최초 페이지 진입시
 	//세션 여부 체크하여 로그인 or 메인페이지 보낼지 판별
 	@RequestMapping(value = "/main/main.do")
-	public String mainPage(HttpSession httpSession, HttpServletRequest request,Model model) {
+	public String mainPage(HttpSession httpSession, HttpServletRequest request,HttpServletResponse response, Model model) {
 		url = request.getRequestURI().substring(request.getContextPath().length()).split(".do")[0];
 		logger.debug("▶▶▶▶▶▶▶.보내려는 url : "+url);
 		//로그인 세션 여부
@@ -58,6 +60,7 @@ public class MainController {
 		List<AuthVo> alist = new ArrayList<>();
 		alist = authService.selectAuthUrl(avo);
 		url=alist.get(0).getUrl();*/
+		
 	    return url;
 	}
 	

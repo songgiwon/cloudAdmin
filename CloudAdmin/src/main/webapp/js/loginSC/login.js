@@ -11,10 +11,10 @@ function stMainIdx(sessionVo,url){
 	if(sessionVo==''){
 		//console.log("로그인 세션X");//로그인 안되있음
 		console.log("로그인 페이지로 이동");
-		location.href="/login/loginAdmin.do";
+		location.replace("/login/loginAdmin.do");
 	}else{
 		//메인화면으로 이동
-		location.href="/main/main.do";
+		location.replace("/main/main.do");
 	}
 }
 
@@ -36,7 +36,7 @@ function inputLogin(inputVal,loginurl){
 			}else{
 				if(json.msg=="중복로그인"){
 					ajaxMethod("/login/loginPost.do?relgn=1",inputVal);
-					location.href=json.url;
+					location.replace(json.url);
 				}else{
 					alert(json.msg);
 				}
