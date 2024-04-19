@@ -90,7 +90,7 @@
                         <div class="ctn_tbl_row">
                             <div class="ctn_tbl_th">문의내용</div>
                             <div class="ctn_tbl_td">
-                                <textarea id="REQ_QUESTION" name="REQ_QUESTION" class="form-control" style="height:470px;"></textarea>
+                                <textarea id="REQ_QUESTION" name="REQ_QUESTION" class="form-control" style="height:400px;"></textarea>
                             </div>
                         </div>
 				   
@@ -107,7 +107,7 @@
 			            <div class="btn_box">
 			                <div class="right">
 			                	<button class="btn btn_primary" style="" id="btnInsert" data-term="L.등록" title="등록"><span class="langSpan">등록</span></button>
-				                    <button class="btn" id="btnSave" alt="저장" value="저장"><span class="langSpan">저장</span></button>
+				                <button class="btn" id="btnSave" alt="저장" value="저장"><span class="langSpan">저장</span></button>
 			                </div>
 			            </div>
 			        </div>

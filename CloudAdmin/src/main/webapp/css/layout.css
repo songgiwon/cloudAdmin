@@ -2087,11 +2087,11 @@ td.ta_right{
     height: 16px;
 }
 /* readonly, disabled */
+/* textarea[disabled],부분은 상세화면에서 보여줘야 하는데 미관상 안이뻐서 빼버림.. */
 input[disabled],
 input[readonly],
 select[disabled],
 select[readonly],
-textarea[disabled],
 textarea[readonly] {background-color:#f3f3f3 !important; color:#8c9497; border-color:#e6e8e9 !important;opacity: 1;}
 .fm_checkbox.disabled,
 .fm_radio.disabled{

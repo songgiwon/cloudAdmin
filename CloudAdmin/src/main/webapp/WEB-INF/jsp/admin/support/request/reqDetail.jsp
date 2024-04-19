@@ -27,60 +27,74 @@
 			$("#ansList").hide();
 			$("#anslist_show").show();
 		});
-		//담당자배정 ,답변 종료하기
+		//담당자배정 
 		$("#btnSet ,#btnEnd").on("click",function(){
-			$("#REQ_STATUS").val($(this).val());
+			$("#REQ_STATUS").val("1");
 			let frm = $("#acDetailFrm").serialize();
-			if($(this).val()==3){//종료하기일경우
-				if(confirm("답변을 종료하시겠습니까? \n (주의 : 종료시에는 답변을 작성하실 수 없습니다)")==true){
-					ajaxMethod('/admin/support/request/reqAnsUser.ajax',frm);
-					location.href='/admin/support/request/reqList.do';		
-				}
-			}else{
-				ajaxMethod('/admin/support/request/reqAnsUser.ajax',frm);
-				location.href='/admin/support/request/reqList.do';	
-			}
+			ajaxMethod('/admin/support/request/reqAnsUser.ajax',frm);
+			location.href='/admin/support/request/reqList.do';	
 		});
 		
 		//답변하기 1 -> 2
 		$("#acDetailFrm").submit(function(e){
 			console.log("문의하기 상세 업데이트");
-			let frm = $("#acDetailFrm").serialize();
-		    var options = {
-	            url:'/admin/support/request/reqUpdate.ajax',
-	            type:"post",
-	            dataType: "json",
-	            data : frm,
-	            async : false,
-	            //contentType: "application/x-www-form-urlencoded; charset=euc-kr",
-	            success: function(res){
-	                if(res.cnt > 0){
-	                    alert("저장되었습니다.");
-	                    location.href='/admin/support/request/reqList.do';
-	                } else {
-	                	if(res.badFileType != null){
-	                		alert("사진파일 첨부는 이미지 파일만 가능합니다.")
-	                	} else if(typeof res.createFileError !== "undefined" && res.createFileError){
-	                	    alert("사진파일 저장에 실패했습니다.");
-	                	} else if(typeof res.msg !== "undefined" && res.msg != null){
-	                		alert(res.msg);
-	                	}else {
-	                		alert("저장에 실패했습니다.");
-	                	}
-	                }
-	            } ,
-	            error: function(res,error){
-	                alert("에러가 발생했습니다."+error);
-	            }
-		    };
-		    $('#acDetailFrm').ajaxSubmit(options);
+			
+			var radVal = $("input[name=ANS_TYPE]:checked").val();
+			if($("input[name=ANS_TYPE]:checked").val()==0){//답변종료
+				if(confirm("답변을 종료하시겠습니까? \n (주의 : 종료시에는 답변을 작성하실 수 없습니다)")==true){
+					$("#REQ_STATUS").val("3");
+					reqSave();
+				}
+			}else{//답변하기
+				$("#REQ_STATUS").val("2");
+				reqSave();
+			}
 		});
+		
+		//답변 종료
+		/* if(confirm("답변을 종료하시겠습니까? \n (주의 : 종료시에는 답변을 작성하실 수 없습니다)")==true){
+			ajaxMethod('/admin/support/request/reqAnsUser.ajax',frm);
+			location.href='/admin/support/request/reqList.do';		
+		} */
 		
 		$("#btnList").on("click",function(){
 			location.href='/admin/support/request/reqList.do';
 		});
 		
 	});
+	
+	function reqSave(){
+		let frm = $("#acDetailFrm").serialize();
+	    var options = {
+            url:'/admin/support/request/reqUpdate.ajax',
+            type:"post",
+            dataType: "json",
+            data : frm,
+            async : false,
+            //contentType: "application/x-www-form-urlencoded; charset=euc-kr",
+            success: function(res){
+                if(res.cnt > 0){
+                    alert("저장되었습니다.");
+                    location.href='/admin/support/request/reqList.do';
+                } else {
+                	if(res.badFileType != null){
+                		alert("사진파일 첨부는 이미지 파일만 가능합니다.")
+                	} else if(typeof res.createFileError !== "undefined" && res.createFileError){
+                	    alert("사진파일 저장에 실패했습니다.");
+                	} else if(typeof res.msg !== "undefined" && res.msg != null){
+                		alert(res.msg);
+                	}else {
+                		alert("저장에 실패했습니다.");
+                	}
+                }
+            } ,
+            error: function(res,error){
+                alert("에러가 발생했습니다."+error);
+            }
+	    };
+	    $('#acDetailFrm').ajaxSubmit(options);
+	}
+	
 </script>
 </head>
 <body class="open">
@@ -172,7 +186,7 @@
 	<div class="ctn_tbl_row">
 	    <div class="ctn_tbl_th">문의내용</div>
 	    <div class="ctn_tbl_td">
-	        <textarea id="REQ_QUESTION" name="REQ_QUESTION" class="long-cont" style="height:200px;" readonly>${reqVo.REQ_QUESTION}</textarea>
+	        <textarea id="REQ_QUESTION" name="REQ_QUESTION" class="long-cont" style="height:200px;" disabled>${reqVo.REQ_QUESTION}</textarea>
 	    </div>
 	</div>
 	 <c:if test="${reqVo.REQ_STATUS!=0}">
@@ -204,12 +218,13 @@
 			<div class="ctn_tbl_row">
 				<div class="ctn_tbl_th fm_rep">답변유형</div>
 			    <div class="ctn_tbl_td">
-					<label for="ans0" class="fm_radio" ><input type="radio" class="form_control" id="ans0" name="ANS_TYPE" value="0" checked/>
+					<label for="ans0" class="fm_radio" ><input type="radio" class="form_control" id="ans0" name="ANS_TYPE" value="0" />
 						<span class="checkmark"></span><span class="langSpan">일반답변</span>
 					</label>
-					<label for="ans1" class="fm_radio" ><input type="radio" class="form_control" id="ans1" name="ANS_TYPE" value="1"/>
+					<label for="ans1" class="fm_radio" ><input type="radio" class="form_control" id="ans1" name="ANS_TYPE" value="1" checked/>
 						<span class="checkmark"></span><span class="langSpan">중간답변</span>
 					</label>
+					※ 일반답변 선택시 답변이 종료됩니다
 			    </div>		
 			    
 			    <div class="ctn_tbl_th fm_rep">중요도</div>
@@ -240,9 +255,9 @@
 			           </c:when>
 			           <c:when test="${reqVo.REQ_STATUS==1 || reqVo.REQ_STATUS==2}">
 							<button type="submit"  class="btn btn_primary" style="" id="btnSave" value="2"><span class="langSpan">답변하기</span></button>
-							<c:if test="${reqVo.REQ_STATUS==2}">
+							<%-- <c:if test="${reqVo.REQ_STATUS==2}">
 								<button type="button"  class="btn btn_primary" style="" id="btnEnd" value="3"><span class="langSpan">답변 종료</span></button>
-							</c:if>
+							</c:if> --%>
 			           </c:when>
 			           <c:otherwise>
 							<button type="button"  class="btn btn_primary" style="background:darkgray; color:lightgray;" ><span class="langSpan">답변 완료</span></button>

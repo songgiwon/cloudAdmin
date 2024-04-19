@@ -125,7 +125,7 @@
                         <div class="ctn_tbl_row">
                             <div class="ctn_tbl_th fm_rep">문의내용</div>
                             <div class="ctn_tbl_td">
-                                <textarea id="REQ_QUESTION" name="REQ_QUESTION" class="long-cont" style="height:470px;" required></textarea>
+                                <textarea id="REQ_QUESTION" name="REQ_QUESTION" class="long-cont" style="height:400px;" required></textarea>
                             </div>
                         </div>
                     </div>

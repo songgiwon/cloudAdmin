@@ -52,7 +52,7 @@
 		<h3>이용약관 ${data.DOCUMENT_ID}</h3>
 	</div>
 	<div>
-		<textarea id="TEXT_VAL" class="long-cont" style="" readonly>${data.TEXT_VAL}</textarea>
+		<textarea id="TEXT_VAL" class="long-cont" style="" disabled>${data.TEXT_VAL}</textarea>
 	</div>
 	
 <!-- 	<div id="footer" class="footer-wrap">

@@ -112,7 +112,7 @@
                         <div class="ctn_tbl_row">
                             <div class="ctn_tbl_th">내용</div>
                             <div class="ctn_tbl_td">
-                                <textarea id="CONTENT" name="CONTENT" class="long-cont" style="height:470px;"></textarea>
+                                <textarea id="CONTENT" name="CONTENT" class="long-cont" style="height:400px;"></textarea>
                             </div>
                         </div>
                     </div>

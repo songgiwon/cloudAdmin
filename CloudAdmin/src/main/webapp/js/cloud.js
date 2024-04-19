@@ -11,7 +11,7 @@ function imgTable(alData,num){
 		//td 내부 만듬
 		tbM+= tdCreate(alData[i].lteRIp,backName,alData[i].lteRUsed); 
 		tbCnt++;
-		//7열 초과시 줄바꿈
+		//받아온 num 값이 넘어가면 숫자가 바뀜
 		if(parseInt((enterLine)%num)==0){
 			var tbCont = "<tr id='tr"+trCnt+"'>"+tbM+"</tr>";
 			$("#lteTbd").append(tbCont);	
@@ -62,7 +62,7 @@ function ansHistoryList(tagId){
 				+'<div class="ctn_tbl_row">'
 					+'<div class="ctn_tbl_th">답변내용</div>'
 				    +'<div class="ctn_tbl_td">'
-				      	+'<textarea id="REQ_ANSWER" class="long-cont" style="height:200px;" readonly>'
+				      	+'<textarea id="REQ_ANSWER" class="long-cont" style="height:200px;" disabled>'
 				      		+ansList[i].REQ_ANSWER
 				      	+'</textarea>'
 				    +'</div>'

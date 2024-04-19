@@ -111,7 +111,7 @@
              <div class="ctn_tbl_row">
                  <div class="ctn_tbl_th fm_rep">내용</div>
                  <div class="ctn_tbl_td">
-                     <textarea id="CONTENT" name="CONTENT" class="long-cont" style="height:470px;" required>${data.CONTENT}</textarea>
+                     <textarea id="CONTENT" name="CONTENT" class="long-cont" style="height:400px;" required>${data.CONTENT}</textarea>
                  </div>
              </div>
          </div>
