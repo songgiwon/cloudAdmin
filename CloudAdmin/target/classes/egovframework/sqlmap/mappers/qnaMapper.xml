@@ -235,7 +235,7 @@
 	<update id="reqUpdate" parameterType="qnaVo">
 	    UPDATE REQ_INFO
 	    SET
-	     REQ_STATUS=2
+	     REQ_STATUS=#{REQ_STATUS}
 	    ,REQ_IMPORTANT=#{REQ_IMPORTANT}
 	    WHERE REQ_ID=#{REQ_ID}
 	</update>
