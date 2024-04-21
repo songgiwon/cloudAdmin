@@ -101,31 +101,22 @@ public class ChargeController{
 	public @ResponseBody ModelAndView updatePriceList(
 			@ModelAttribute("companyVO") CompanyVo thvo
 			,HttpSession httpSession, HttpServletRequest request,Model model
-			//,@RequestPart(value = "inputList", required = false) List<ChargeVo> inputList
-			//,@RequestPart(value = "chgList", required = false) List<ChargeVo> chgList
-			//,@RequestPart(value = "chargeList[]", required = false) List<ChargeVo> chgList2
-			,@RequestParam(value = "CHARGE_ID[]", required = false) List<String> CHARGE_ID
-			,@RequestParam(value = "DATADR_PRICE[]", required = false) List<String> DATADR_PRICE
-			,@RequestParam(value = "IAAS_PRICE[]", required = false) List<String> IAAS_PRICE
-			,@RequestParam(value = "MSP_PRICE[]", required = false) List<String> MSP_PRICE
 			) throws Exception{
 		logger.debug("▶▶▶▶▶▶▶.회원정보 조회 목록!!!!!!!!!!!!!!!!");
 		ModelAndView mav = new ModelAndView("jsonView");
 		List<ChargeVo> sList= null;
+		int cnt=1;
 		try {
-			// 현재 세션에 대해 로그인한 사용자 정보를 가져옴
-			UserVO nlVo = (UserVO) request.getSession().getAttribute("login");
-			int cnt=1;
 			try {
 				//msp 요금제 관련
 				if(thvo.getChgList()!=null) {
-					/*chargeService.deleteCharge(thvo.getChgList());
-					cnt=chargeService.chargeInsert(thvo.getChgList());*/
+						chargeService.deleteCharge(thvo.getChgList());
+					cnt=chargeService.chargeInsert(thvo.getChgList());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				logger.debug("에러메시지 : "+e.toString());
-				mav.addObject("msg","동일 클라우드일 경우에는 다른 요금제를 선택해주세요");
+				mav.addObject("msg","저장에 실패했습니다 유효한 값을 입력해 주세요");
 				return mav;
 			}
 			mav.addObject("cnt", cnt);

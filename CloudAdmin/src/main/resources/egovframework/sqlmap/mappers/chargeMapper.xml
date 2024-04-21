@@ -12,26 +12,21 @@
 <!-- 고객과금 -->
 
 	<select id="selectPriceList" parameterType="chargeVo" resultType="chargeVo">
-		SELECT 
-		CONCAT(J1.COMPANY_ID,"-",DATE_FORMAT(J1.REG_DT, '%Y%m%d'),"-",J2.SERVICE_TYPE) AS CHARGE_ID
-		,ABS(DATEDIFF(BILL_DT,DUE_DATE))+1 AS USE_DT
+	SELECT 
+		ABS(DATEDIFF(BILL_DT,DUE_DATE))+1 AS USE_DT
+		,IFNULL(PRE_PRICE_NNVL,0) AS PRE_PRICE
 		,J1.*,J2.* 
-		
 		FROM
 		(
 			SELECT 
 			 A.COMPANY_ID
+			,CONCAT(A.COMPANY_ID,"-",DATE_FORMAT(A.REG_DT, '%Y%m%d'),"-",IFNULL(B.SERVICE_TYPE,3)) AS CHARGE_ID
+			
 			,A.COMPANY_NAME
 			,A.BILL_DT
 			,A.BILL_RFDT
 			,A.BR_NUMBER
 			,LAST_DAY(BILL_RFDT+ INTERVAL 1 MONTH) AS DUE_DATE
-			
-			,A.MSP_NHN
-			,A.MSP_NAVER
-			,A.MSP_KT
-			,A.MSP_AWS
-			,A.MSP_RESALE
 			,A.IAAS_NHN
 			,A.IAAS_NAVER
 			,A.IAAS_KT
@@ -39,119 +34,93 @@
 			,A.SDR_NHN
 			,A.SDR_NAVER
 			,A.SDR_KT
-			
-			,B.MSP_PRICE
-			,B.IAAS_PRICE
-			,B.DATADR_PRICE
-			,B.PRICE_TYPE
-			,B.SUM_PRICE
-			
-			,A.COMPANY_ID AS TID
 			,A.REG_DT
+			
+			,CASE
+		 	WHEN SERVICE_TYPE=0 THEN 'LITE'
+			WHEN SERVICE_TYPE=1 THEN 'STANDARD'
+			WHEN SERVICE_TYPE=2 THEN 'PREMIUM'
+			ELSE 
+				CASE
+					WHEN SDR_NHN ='N' AND  SDR_NAVER='N' AND SDR_KT='N' THEN 'IAAS' 
+					WHEN IAAS_NHN ='N' AND  IAAS_NAVER='N' AND IAAS_KT='N' AND IAAS_AWS='N' THEN 'DATA DR'
+					ELSE 'IAAS/DATA' END			
+			END AS SERVICE_TYPE_NM
+			
+			,B.* 
 			FROM 
 			company_info A
 			LEFT JOIN
-			charge_info B
-			ON (A.COMPANY_ID=B.COMPANY_ID)
-		)J1
-		RIGHT JOIN
-		(
-			SELECT mp.*, danga*buy_cnt AS PRE_PRICE 
-			from
 			(
-				SELECT 
-				mm.*,
-				case 
-					when service_type=0 then 150000
-					when service_type=1 then 250000
-					ELSE 350000 END AS danga
-				FROM 
-				msp_charge mm
-			)mp		
-		)J2
-		ON(J1.TID=J2.COMPANY_ID)
-		
-		WHERE 1=1
-		AND
-		(
-			( J1.IAAS_NHN    ='Y'
-				OR J1.IAAS_NAVER  ='Y'
-				OR J1.IAAS_KT     ='Y'
-				OR J1.IAAS_AWS    ='Y'
-			)
-			OR
-			 (J1.SDR_NHN     ='Y'
-				OR J1.SDR_NAVER   ='Y'
-				OR J1.SDR_KT      ='Y'
-			)
-		)
+				SELECT mp.*, FORMAT(danga*buy_cnt , 0) AS PRE_PRICE_NNVL
+				from
+				(
+					SELECT 
+					mm.COMPANY_ID AS TID,
+					mm.CLOUD_TYPE,
+					mm.SERVICE_TYPE,
+					mm.BUY_CNT,
+					case 
+						when service_type=0 then 150000
+						when service_type=1 then 250000
+						ELSE 350000 END AS danga
+					FROM 
+					msp_charge mm
+				)mp
+			)B
+			ON(A.COMPANY_ID=B.TID)
+			WHERE 
+				B.CLOUD_TYPE IS NOT NULL
+				OR
+				( A.IAAS_NHN    		='Y'
+					OR A.IAAS_NAVER  ='Y'
+					OR A.IAAS_KT     ='Y'
+					OR A.IAAS_AWS    ='Y'
+				)
+				OR
+				 (	A.SDR_NHN     		='Y'
+					OR A.SDR_NAVER 	='Y'
+					OR A.SDR_KT     	='Y'
+				)
+		)J1
+		LEFT JOIN 
+		(	
+		SELECT 
+			CHARGE_ID	AS TID
+			,COMPANY_ID	
+			,PRICE_TYPE	
+			,MSP_PRICE	
+			,IAAS_PRICE	
+			,DATADR_PRICE
+			,SUM_PRICE	
+			FROM CHARGE_INFO 
+		)	
+		J2
+		ON(J1.CHARGE_ID=J2.TID)
 	</select>
 	
 	<insert id="chargeInsert" parameterType="chargeVo">
 	    INSERT INTO CHARGE_INFO
-		SELECT 
-		CONCAT(J1.COMPANY_ID,"-",DATE_FORMAT(J1.REG_DT, '%Y%m%d'),"-",J2.SERVICE_TYPE) AS CHARGE_ID
-			,J1.COMPANY_ID
-			,J2.SERVICE_TYPE
-			,J1.MSP_PRICE
-			,J1.IAAS_PRICE
-			,J1.DATADR_PRICE
-		FROM
-		(
-			SELECT 
-			 A.COMPANY_ID
-			,A.COMPANY_NAME
-			,A.BILL_DT
-			,A.BILL_RFDT
-			,A.BR_NUMBER
-			,LAST_DAY(BILL_RFDT+ INTERVAL 1 MONTH) AS DUE_DATE
-			
-			,A.MSP_NHN
-			,A.MSP_NAVER
-			,A.MSP_KT
-			,A.MSP_AWS
-			,A.MSP_RESALE
-			,A.IAAS_NHN
-			,A.IAAS_NAVER
-			,A.IAAS_KT
-			,A.IAAS_AWS
-			,A.SDR_NHN
-			,A.SDR_NAVER
-			,A.SDR_KT
-			
-			,B.MSP_PRICE
-			,B.IAAS_PRICE
-			,B.DATADR_PRICE
-			,A.COMPANY_ID AS TID
-			,A.REG_DT
-			FROM 
-			company_info A
-			LEFT JOIN
-			charge_info B
-			ON (A.COMPANY_ID=B.COMPANY_ID)
-		)J1
-		RIGHT JOIN
-		msp_charge J2
-		ON(J1.TID=J2.COMPANY_ID)
-		
-		WHERE 1=1
-		AND
-		(
-			( J1.IAAS_NHN    ='Y'
-				OR J1.IAAS_NAVER  ='Y'
-				OR J1.IAAS_KT     ='Y'
-				OR J1.IAAS_AWS    ='Y'
-			)
-			OR
-			 (J1.SDR_NHN     ='Y'
-				OR J1.SDR_NAVER   ='Y'
-				OR J1.SDR_KT      ='Y'
-				)
-		)
+		 VALUES 
+	    <foreach collection="list" item="item" index="index" separator=",">
+            (
+            	 #{item.CHARGE_ID}
+            	,#{item.COMPANY_ID}
+            	,SUBSTRING_INDEX(#{item.CHARGE_ID},'-',-1)
+            	,#{item.MSP_PRICE}
+            	,#{item.IAAS_PRICE}
+            	,#{item.DATADR_PRICE}
+            	,#{item.SUM_PRICE}
+            )
+        </foreach>
 	</insert>
 	
 	<delete id="deleteCharge" parameterType="chargeVo">
 	    delete from CHARGE_INFO
+	    WHERE CHARGE_ID IN
+	    <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+            #{item.CHARGE_ID}
+        </foreach>
 	</delete>
 	
 </mapper>

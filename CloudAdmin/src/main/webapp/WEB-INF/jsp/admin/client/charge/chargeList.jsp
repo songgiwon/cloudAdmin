@@ -52,45 +52,44 @@
                 "dataType": "json",
             },  
             columns: [
-
             	{data:"charge_ID"
             		,"render": function (data, type, row, meta) {
-            			return '<input type="hidden" id="CHARGE_ID" name="getChgList['+meta.row+'].CHARGE_ID" value="'+data+'"/>'+data;
+            			return '<input type="hidden" id="COMPANY_ID" name="chgList['+meta.row+'].COMPANY_ID" value="'+row.company_ID+'"/>  <input type="hidden" id="CHARGE_ID" name="chgList['+meta.row+'].CHARGE_ID" value="'+data+'"/><span style="font-size:12px;">'+data+'</span>';
             		}	
             	},
-                {data:"company_ID"
+            	{data:"company_NAME"
             		,"render": function (data, type, row, meta) {
-            			return '<input type="hidden" id="COMPANY_ID" name="getChgList['+meta.row+'].COMPANY_ID" value="'+data+'"/>'+data;
+            			return '<input type="hidden"  name="chgList['+meta.row+'].COMPANY_NAME" value="'+data+'"/>'+data;
             		}	
             	},
-                {data:"company_NAME"
+                {data:"service_TYPE_NM"
             		,"render": function (data, type, row, meta) {
-            			return '<input type="hidden"  name="getChgList['+meta.row+'].COMPANY_NAME" value="'+data+'"/>'+data;
+            			return '<input type="hidden" name="chgList['+meta.row+'].PRE_PRICE" value="'+data+'"/>'+data;
             		}	
             	},
-                {data:"pre_PRICE"
+            	{data:"pre_PRICE"
             		,"render": function (data, type, row, meta) {
-            			return '<input type="hidden" name="getChgList['+meta.row+'].PRE_PRICE" value="'+data+'"/>'+data;
+            			return '<input type="hidden"  name="chgList['+meta.row+'].PRE_PRICE" value="'+data+'"/>'+data;
             		}	
             	},
                 {data:"bill_DT"
             		,"render": function (data, type, row, meta) {
-            			return '<input type="hidden" name="getChgList['+meta.row+'].BILL_DT" value="'+data+'"/>'+data;
+            			return '<input type="hidden" name="chgList['+meta.row+'].BILL_DT" value="'+data+'"/>'+data;
             		}	
             	},
                 {data:"bill_RFDT"
             		,"render": function (data, type, row, meta) {
-            			return '<input type="hidden" name="getChgList['+meta.row+'].BILL_RFDT" value="'+data+'"/>'+data;
+            			return '<input type="hidden" name="chgList['+meta.row+'].BILL_RFDT" value="'+data+'"/>'+data;
             		}	
             	},
                 {data:"use_DT"
             		,"render": function (data, type, row, meta) {
-            			return '<input type="hidden" name="getChgList['+meta.row+'].USE_DT" value="'+data+'"/>'+data;
+            			return '<input type="hidden" name="chgList['+meta.row+'].USE_DT" value="'+data+'"/>'+data;
             		}	
             	},
                 {data:"due_DATE"
             		,"render": function (data, type, row, meta) {
-            			return '<input type="hidden" name="getChgList['+meta.row+'].DUE_DATE" value="'+data+'"/>'+data;
+            			return '<input type="hidden" name="chgList['+meta.row+'].DUE_DATE" value="'+data+'"/>'+data;
             		}	
             	},
                 {data:"br_NUMBER"
@@ -98,7 +97,7 @@
             			if(data==null || typeof data === "undefined"){
 							data=""
 	            		}
-            			return '<input type="hidden" name="getChgList['+meta.row+'].BR_NUMBER" value="'+data+'"/>'+data;
+            			return '<input type="hidden" name="chgList['+meta.row+'].BR_NUMBER" value="'+data+'"/>'+data;
             		}	
             	},
                 {data:"msp_PRICE",
@@ -106,7 +105,7 @@
 						if(data==null || typeof data === "undefined"){
 							data=""
 	            		}
-	                    return '<input type="text" id="MSP_PRICE" name="getChgList['+meta.row+'].MSP_PRICE" style="width: 80px;" value="'+data+'" onkeyup="valiChkAll(this,1)"  />';
+	                    return '<input type="text" id="MSP_PRICE" name="chgList['+meta.row+'].MSP_PRICE" style="width: 80px;" class="autoSum" value="'+data+'" onkeyup=autoSum($(this).parent().parent().find('+'".autoSum"'+'),$(this).parent().parent().find('+'"#SUM_PRICE"'+'))  />';
 	                },
                 },
                 {data:"iaas_PRICE",
@@ -114,7 +113,7 @@
 	            		if(data==null || typeof data === "undefined"){
 							data=""
 	            		}
-	                        return '<input type="text" id="IAAS_PRICE" name="getChgList['+meta.row+'].IAAS_PRICE" style="width: 80px;" value="'+data+'" onkeyup="valiChkAll(this,1)"  />';
+	                        return '<input type="text" id="IAAS_PRICE" name="chgList['+meta.row+'].IAAS_PRICE" style="width: 80px;" class="autoSum" value="'+data+'" onkeyup=autoSum($(this).parent().parent().find('+'".autoSum"'+'),$(this).parent().parent().find('+'"#SUM_PRICE"'+'))  />';
 	                }
 	            },
                 {data:"datadr_PRICE",
@@ -122,15 +121,15 @@
 	            		if(data==null || typeof data === "undefined"){
 							data=""
 	            		}
-	                        return '<input type="text" id="DATADR_PRICE" name="getChgList['+meta.row+'].DATADR_PRICE" style="width: 80px;" value="'+data+'" onkeyup="valiChkAll(this,1)"  />';
+	                        return '<input type="text" id="DATADR_PRICE" name="chgList['+meta.row+'].DATADR_PRICE" class="autoSum" style="width: 80px;" value="'+data+'" onkeyup=autoSum($(this).parent().parent().find('+'".autoSum"'+'),$(this).parent().parent().find('+'"#SUM_PRICE"'+'))  />';
 	                }
 	            },
-                {data:"SUM_PRICE",
+                {data:"sum_PRICE",
 	            	"render": function (data, type, row, meta) {
 	            		if(data==null || typeof data === "undefined"){
 							data=""
 	            		}
-	                        return '<input type="text"  id="SUM_PRICE" name="getChgList['+meta.row+'].SUM_PRICE" style="width: 80px;" value="'+data+'" onkeyup="valiChkAll(this,1)"  />';
+	                        return '<input type="text"  id="SUM_PRICE" name="chgList['+meta.row+'].SUM_PRICE" style="width: 80px;" value="'+data+'" onkeyup="valiChkAll(this,1)"  readonly/>';
 	                }
 	            }
             ],
@@ -190,24 +189,23 @@
 					if($(this).attr("id")=='CHARGE_ID'){
 						chargeId.push($(this).val());
 					}
-				})
+				});
 				/////////
-				$("#CHARG").val($("#tableList"));
+				//$("#CHARG").val($("#tableList"));
 				
-				$("#inputList").val(frm);
+				//$("#inputList").val(frm);
 			    var options = {
 		            url:'/admin/client/charge/updatePriceList.ajax?',
 		            type:"post",
 		            dataType: "json",
-		            data : {
-		            	 //'companyVO':frm,
-						 'CHARGE_ID':chargeId	            	
-						,'DATADR_PRICE':datadrPrice	            	
-						,'IAAS_PRICE':iaasPrice	            	
-						,'MSP_PRICE':mspPrice	            	
-		            	/* ,'chgList':frm
-		            	,'chargeList':chargeList */
-		            },
+		            data : frm, 
+		            /* {
+		            	 'companyVO':frm,
+						'CHARGE_ID':chargeId,	            	
+						'DATADR_PRICE':datadrPrice,	            	
+						'IAAS_PRICE':iaasPrice,         	
+						'MSP_PRICE':mspPrice
+		            } */
 		            success: function(res){
 		                if(res.cnt > 0){
 		                    alert("저장되었습니다.");
@@ -243,6 +241,8 @@
 			 //defaultDate:moment(),
 			 maxDate : moment()
 		});
+		
+		$("tbody tr td:first-child").css("font-size","13px");
 	});
 	
 	/* 검색 */
@@ -287,7 +287,7 @@
 				<!-- search_box Start -->
 	            <div class="search_box">
 			   
-					<div class="form-group col_14">
+					<div class="form-group col_14" style="width: 100%;">
 						<label class="form-control-label"><span class="langSpan">검색어</span></label>
 						<select class="form-control mw_30" id="searchType" name="searchType">
 	                        <option value="companyId">고객번호</option>
@@ -298,7 +298,7 @@
 						<input class="form-control" type="text" id="searchValue" name="searchValue"  onkeyup="if(event.keyCode == 13)search();"/>
 					</div>
 					
-					<div class="form-group col_3">
+					<div class="form-group col_3" style="width: 80%;display: flex;flex-direction: row;margin-top: 13px;" >
 						<label class="form-control-label">
 							<span class="langSpan">기간설정</span>
 						</label>

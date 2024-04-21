@@ -11,7 +11,7 @@ public interface ChargeService {
 	//과금 관련
 	List<ChargeVo> selectPriceList(ChargeVo thvo);
 
-	int chargeInsert(ChargeVo thvo);
+	int chargeInsert(List<ChargeVo> thvo);
 
-	void deleteCharge();
+	void deleteCharge(List<ChargeVo> thvo);
 }

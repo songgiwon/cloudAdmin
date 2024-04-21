@@ -18,6 +18,10 @@ public class ChargeVo extends FileVo{
 	private String BILL_RFDT;
 	private String DUE_DATE;
 	
+	private String SERVICE_TYPE;
+	private String SERVICE_TYPE_NM;
+	private String PRICE_TYPE;
+	
 	private String USE_DT;
 	private String BR_NUMBER;
 	private String MSP_PRICE;
@@ -26,6 +30,24 @@ public class ChargeVo extends FileVo{
 	
 	private String SUM_PRICE;
 	
+	public String getSERVICE_TYPE() {
+		return SERVICE_TYPE;
+	}
+	public void setSERVICE_TYPE(String sERVICE_TYPE) {
+		SERVICE_TYPE = sERVICE_TYPE;
+	}
+	public String getSERVICE_TYPE_NM() {
+		return SERVICE_TYPE_NM;
+	}
+	public void setSERVICE_TYPE_NM(String sERVICE_TYPE_NM) {
+		SERVICE_TYPE_NM = sERVICE_TYPE_NM;
+	}
+	public String getPRICE_TYPE() {
+		return PRICE_TYPE;
+	}
+	public void setPRICE_TYPE(String pRICE_TYPE) {
+		PRICE_TYPE = pRICE_TYPE;
+	}
 	public String getDUE_DATE() {
 		return DUE_DATE;
 	}

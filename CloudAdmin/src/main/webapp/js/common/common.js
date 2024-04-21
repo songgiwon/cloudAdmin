@@ -193,8 +193,6 @@ function goMenuSite(goUrl,thDiv){
     
 }
 
-
-
 /************************************************************************
 함수명 : chkArrValiF
 설 명 : 체크박스 배열내 선택 구별 함수
@@ -213,6 +211,38 @@ function chkArrValiF(objArr,chkVal){
 		}
 	}
 	return true;
+}
+
+/************************************************************************
+함수명 : autoSum
+설 명 : 자동합계 산출 함수
+인 자 : 
+	inputList : 집계할 태그들의 id값
+	rst : 합계를 표출할 태그의 id값
+사용법 : 자동합계 표출시
+작성일 : 2024.04.18
+작성자 : 기술연구소 정다빈
+수정일        수정자       수정내용
+----------- ------ -------------------
+2020.08.19   정다빈       최초작성
+************************************************************************/
+function autoSum(inputList,rst){
+	console.log("오토썸");
+	var sum =0;
+	$(inputList).each(function(i,list){
+		var value=$(this).val(); 
+		value= Number(value.replaceAll(',', ''));
+		if(isNaN(value)) {
+			$(this).val("0");
+		}else {
+			//3자리 수 별로 ',' 추가
+		    const formatValue = value.toLocaleString('ko-KR');
+		    $(this).val(formatValue);
+		    sum += value;
+		}
+	});
+	const formatSum = sum.toLocaleString('ko-KR');
+	$(rst).val(formatSum);
 }
 
 /************************************************************************
@@ -244,3 +274,6 @@ status		팝업창의 상태 표시줄을 Visible 여부를 설정 (status= no or
 function popupMethod(url,name,option){
     window.open(url, name, option);
 }
+
+
+

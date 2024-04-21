@@ -23,13 +23,13 @@ public class ChargeServiceImpl implements ChargeService{
 	}
 
 	@Override
-	public int chargeInsert(ChargeVo thvo) {
+	public int chargeInsert(List<ChargeVo> thvo) {
 		return chargeMapper.chargeInsert(thvo);
 	}
 
 	@Override
-	public void deleteCharge() {
-		chargeMapper.deleteCharge();		
+	public void deleteCharge(List<ChargeVo> thvo) {
+		chargeMapper.deleteCharge(thvo);		
 	}
 	
 }
