@@ -213,7 +213,7 @@ public class ChargeController{
 				//경로,원본id
 			 	//String firstPath="C:\\";
 				String firstPath="/usr/local/tomcat/share_data/";
-				String inputPath = "resources/billManual/" +inputVo.getBILL_FILE_ID()+ "/";
+				String inputPath = "/billManual/" +inputVo.getBILL_FILE_ID()+ "/";
 				String oriId = inputVo.getBILL_FILE_ID();
 				/*공통 적용 부분*/
 				FileVo fvo = new FileVo();
@@ -222,7 +222,7 @@ public class ChargeController{
 				
 				FileVo orifileVo=billService.firstFile();
 				
-				File file = new File(firstPath+inputPath+orifileVo.getFILE_NAME());
+				File file = new File(firstPath+"resources"+inputPath+orifileVo.getFILE_NAME());
 				File orifile = new File(firstPath+"resources"+orifileVo.getFILE_DIR()+orifileVo.getFILE_NAME());
 				
 				file.getParentFile().mkdirs();// 파일 상부의 모든 존재하지 않는 경로 생성
