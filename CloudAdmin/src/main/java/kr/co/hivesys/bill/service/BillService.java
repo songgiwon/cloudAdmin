@@ -3,6 +3,7 @@ package kr.co.hivesys.bill.service;
 import java.util.List;
 
 import kr.co.hivesys.bill.vo.BillVo;
+import kr.co.hivesys.comm.file.vo.FileVo;
 import kr.co.hivesys.company.vo.CompanyVo;
 
 
@@ -20,5 +21,13 @@ public interface BillService {
 	int delete(List<String> inputList);
 
 	int firstNumber(BillVo inputVo);
+	
+	//#####################수동청구서#####################//
+	
+	List<BillVo> manualList(BillVo inputVo);
+	String createMnId(BillVo inputVo);
+	int manualInsert(BillVo inputVo);
+	
+	FileVo firstFile();
 	
 }

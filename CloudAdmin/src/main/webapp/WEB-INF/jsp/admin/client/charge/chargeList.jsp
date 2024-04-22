@@ -35,6 +35,12 @@
 	var iidx;//날짜컬럼 인덱스
 	var selectlang;
 	
+/* 	function show_popup_insert(){
+		console.log("고객사등록");
+	    document.getElementsByClassName('modal size_l normal')[0].classList.toggle('show');
+	    $("#modal_popup_insert #popupBody").load("/admin/client/charge/billInsert.do");
+	} */
+	
 	$(document).ready( function() {
 		
 		iidx = 3;
@@ -346,6 +352,15 @@
 				   </div>
 				</div>
 	            <!-- search_box End -->
+                
+                <!-- 엑셀저장 -->
+				<div class="btn_box">
+					<div class="right">
+						<button class="btn btn_primary" id="btnDownload" onclick="location.href='/admin/client/charge/excelDownload.ajax'">
+							<span class="langSpan">다운로드</span>
+						</button>
+					</div>
+				</div>
                 
 	            <!-- grid_box Start -->
 	            <h4>※각 요금들은 VAT이 포함</h4>
