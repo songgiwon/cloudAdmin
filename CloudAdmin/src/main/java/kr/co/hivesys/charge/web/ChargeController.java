@@ -78,7 +78,7 @@ public class ChargeController{
 	//과금현황 목록
 	@RequestMapping(value= "/admin/client/charge/chargeList.ajax")
 	public @ResponseBody ModelAndView selectPriceList(
-			 @ModelAttribute("ChargeVo") ChargeVo thvo,
+			@ModelAttribute("companyVO") CompanyVo thvo,
 			HttpSession httpSession, HttpServletRequest request,Model model
 			) throws Exception{
 		logger.debug("▶▶▶▶▶▶▶.회원정보 조회 목록!!!!!!!!!!!!!!!!");

@@ -11,11 +11,13 @@
 
 <!-- 고객과금 -->
 
-	<select id="selectPriceList" parameterType="chargeVo" resultType="chargeVo">
-	SELECT 
-		ABS(DATEDIFF(BILL_DT,BILL_RFDT))+1 AS USE_DT
-		,IFNULL(PRE_PRICE_NNVL,0) AS PRE_PRICE
-		,J1.*,J2.* 
+	<select id="selectPriceList" parameterType="companyVo" resultType="chargeVo">
+	SELECT T.* FROM	
+	(
+	    SELECT 
+			ABS(DATEDIFF(BILL_DT,BILL_RFDT))+1 AS USE_DT
+			,IFNULL(PRE_PRICE_NNVL,0) AS PRE_PRICE
+			,J1.*,J2.* 
 		FROM
 		(
 			SELECT 
@@ -72,22 +74,24 @@
 			WHERE 
 				B.CLOUD_TYPE IS NOT NULL
 				OR
-				( A.IAAS_NHN    		='Y'
-					OR A.IAAS_NAVER  ='Y'
-					OR A.IAAS_KT     ='Y'
-					OR A.IAAS_AWS    ='Y'
+				( 
+					A.IAAS_NHN			='Y'
+					OR A.IAAS_NAVER		='Y'
+					OR A.IAAS_KT		='Y'
+					OR A.IAAS_AWS		='Y'
 				)
 				OR
-				 (	A.SDR_NHN     		='Y'
-					OR A.SDR_NAVER 	='Y'
+				 (	
+				 	A.SDR_NHN     		='Y'
+					OR A.SDR_NAVER 		='Y'
 					OR A.SDR_KT     	='Y'
 				)
 		)J1
 		LEFT JOIN 
 		(	
 		SELECT 
-			CHARGE_ID	AS TID
-			,COMPANY_ID	
+			CHARGE_ID	AS TTID
+			,COMPANY_ID	AS CID
 			,PRICE_TYPE	
 			,MSP_PRICE	
 			,IAAS_PRICE	
@@ -96,7 +100,38 @@
 			FROM CHARGE_INFO 
 		)	
 		J2
-		ON(J1.CHARGE_ID=J2.TID)
+		ON(J1.CHARGE_ID=J2.TTID)
+	)T
+	WHERE 1=1
+		<!-- 고객사 ID 여부-->	
+		<if test="COMPANY_ID !=null and COMPANY_ID neq ''">
+				and T.COMPANY_ID=#{COMPANY_ID}
+		</if>
+		<!-- 계약일(검색기간) -->	
+		<choose>
+		    <when test="searchRadio2 !=null and searchRadio2 neq ''">
+				AND <![CDATA[ T.BILL_RFDT >= CURDATE() - INTERVAL #{searchRadio2} MONTH ]]>
+		    </when>
+		    <otherwise>
+		        <if test="sDate !=null and sDate neq '' and eDate !=null and eDate neq '' ">
+				    AND <![CDATA[ T.BILL_RFDT >= #{sDate}  AND T.BILL_RFDT <= #{eDate} ]]>
+				</if>
+		    </otherwise>
+		</choose>
+		<!-- 검색어 -->
+		<if test="searchValue !=null and searchValue neq ''"> 
+			<choose>
+			    <when test="searchType eq 'companyName'">
+			        AND T.COMPANY_NAME LIKE CONCAT('%',#{searchValue},'%')	
+			    </when>
+			    <when test="searchType eq 'chargeId'">
+			        AND T.CHARGE_ID LIKE CONCAT('%',#{searchValue},'%')	
+			    </when>
+			    <otherwise>
+			        AND T.SERVICE_TYPE_NM LIKE CONCAT('%',#{searchValue},'%')	
+			    </otherwise>
+			</choose>
+		</if>
 	</select>
 	
 	<insert id="chargeInsert" parameterType="chargeVo">

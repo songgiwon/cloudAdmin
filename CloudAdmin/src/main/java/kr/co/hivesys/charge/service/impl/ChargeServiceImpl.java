@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.co.hivesys.charge.mapper.ChargeMapper;
 import kr.co.hivesys.charge.service.ChargeService;
 import kr.co.hivesys.charge.vo.ChargeVo;
+import kr.co.hivesys.company.vo.CompanyVo;
 
 @Service("chargeService")
 public class ChargeServiceImpl implements ChargeService{
@@ -18,7 +19,7 @@ public class ChargeServiceImpl implements ChargeService{
 	private ChargeMapper chargeMapper;
 	
 	@Override
-	public List<ChargeVo> selectPriceList(ChargeVo thvo) {
+	public List<ChargeVo> selectPriceList(CompanyVo thvo) {
 		return chargeMapper.selectPriceList(thvo);
 	}
 

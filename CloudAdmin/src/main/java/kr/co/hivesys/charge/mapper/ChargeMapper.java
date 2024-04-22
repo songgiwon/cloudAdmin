@@ -11,7 +11,7 @@ import kr.co.hivesys.company.vo.CompanyVo;
 public interface ChargeMapper {
 
 
-	List<ChargeVo> selectPriceList(ChargeVo thvo);
+	List<ChargeVo> selectPriceList(CompanyVo thvo);
 
 	int chargeInsert(List<ChargeVo> thvo);
 

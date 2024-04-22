@@ -215,10 +215,10 @@
 						</div>
 						
 						<div class="form-group col_14">
-							<label class="form-control-label"><span class="langSpan">검색어</span></label>
+							<label class="form-control-label"><span class="langSpan">검색어 : </span></label>
 							<select class="form-control mw_30" id="searchType" name="searchType">
+		                        <option value="companyName">고객사명</option>
 		                        <option value="companyId">고객번호</option>
-		                        <option value="companyName">이름</option>
 		                        <option value="managerId">계정관리자 ID</option>
 		                        <option value="rpName">대표자명</option>
 		                    </select>
@@ -227,7 +227,7 @@
 						
 						<div class="form-group col_3">
 							<label class="form-control-label">
-								<span class="langSpan">기간설정</span>
+								<span class="langSpan">기간설정 : </span>
 							</label>
 							<div class="form_daterange" style="display: inline-flex;align-items: center;gap: 5px;" id="schDtBody">
 								<!-- 기간 -->

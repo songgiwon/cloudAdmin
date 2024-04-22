@@ -93,7 +93,9 @@ public class CompanyController {
 	
 	//사용자 목록 조회
 	@RequestMapping(value="/admin/client/company/companyList.ajax")
-	public @ResponseBody ModelAndView userList( @ModelAttribute("companyVO") CompanyVo thvo,HttpServletRequest request) throws Exception{
+	public @ResponseBody ModelAndView userList( 
+			@ModelAttribute("companyVO") CompanyVo thvo
+			,HttpServletRequest request) throws Exception{
 		logger.debug("▶▶▶▶▶▶▶.회원정보 조회 목록!!!!!!!!!!!!!!!!");
 		
 		CompanyVo newVo = new CompanyVo();

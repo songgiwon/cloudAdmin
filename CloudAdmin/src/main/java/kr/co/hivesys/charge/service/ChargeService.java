@@ -9,7 +9,7 @@ import kr.co.hivesys.company.vo.CompanyVo;
 public interface ChargeService {
 	
 	//과금 관련
-	List<ChargeVo> selectPriceList(ChargeVo thvo);
+	List<ChargeVo> selectPriceList(CompanyVo thvo);
 
 	int chargeInsert(List<ChargeVo> thvo);
 
