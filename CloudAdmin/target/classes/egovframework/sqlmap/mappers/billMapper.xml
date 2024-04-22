@@ -183,7 +183,7 @@
 	    (
 	    	SELECT BILL_FILE_ID FROM bill_file
 	    	WHERE BILL_PRIOR = 1
-	    )
+	    ) 
 	</select>
 	
 </mapper>

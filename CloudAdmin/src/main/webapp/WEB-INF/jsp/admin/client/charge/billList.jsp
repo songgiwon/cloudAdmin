@@ -168,7 +168,7 @@
 	            <div class="search_box">
 			   
 					<div class="form-group col_14" style="width: 100%;">
-						<label class="form-control-label"><span class="langSpan">검색어 : </span></label>
+						<label class="form-control-label"><span class="langSpan">검색어  </span></label>
 						<select class="form-control mw_30" id="searchType" name="searchType">
 	                        <option value="companyName">수신자(회사)</option>
 	                    </select>
@@ -177,7 +177,7 @@
 					
 					<div class="form-group col_3" style="width: 80%;display: flex;flex-direction: row;margin-top: 13px;" >
 						<label class="form-control-label">
-							<span class="langSpan">기간설정 : </span>
+							<span class="langSpan">기간설정  </span>
 						</label>
 						<div class="form_daterange" style="display: inline-flex;align-items: center;gap: 5px;" id="schDtBody">
 							<!-- 기간 -->
