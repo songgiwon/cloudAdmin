@@ -253,7 +253,7 @@
 <div class="modal size_l normal" id="modal_popup_insert">
     <div class="popup_layer">
         <div class="pop_header">
-            <div class="pop_header_ttl">청구서양식 등록</div>
+            <div class="pop_header_ttl">수동청구서 전송</div>
             <button type="button" class="btn-close" onclick="show_popup_insert()">close</button>
         </div>
         <div class="pop_body" id="popupBody" style="height: 350px;"></div>

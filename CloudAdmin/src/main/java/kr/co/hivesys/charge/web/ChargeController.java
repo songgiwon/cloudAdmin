@@ -152,7 +152,7 @@ public class ChargeController{
 			@ModelAttribute("billVO") BillVo thvo,
 			HttpSession httpSession, HttpServletRequest request,Model model
 			) throws Exception{
-		logger.debug("▶▶▶▶▶▶▶.회원정보 조회 목록!!!!!!!!!!!!!!!!");
+		logger.debug("▶▶▶▶▶▶.수동청구서 조회!!!!!!!!!!!!!!!!");
 		
 		ModelAndView mav = new ModelAndView("jsonView");
 		List<BillVo> mnList= null;
@@ -168,7 +168,7 @@ public class ChargeController{
 		return mav;
 	}
 	
-	//수동청구서 등록 페이지
+	//수동청구서 등록 페이지 
 	@RequestMapping(value= "/admin/client/charge/billInsert.do")
 	public @ResponseBody ModelAndView billInsert(
 			@ModelAttribute("billVO") BillVo thvo,
