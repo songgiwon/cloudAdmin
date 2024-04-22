@@ -13,7 +13,7 @@
 
 	<select id="selectPriceList" parameterType="chargeVo" resultType="chargeVo">
 	SELECT 
-		ABS(DATEDIFF(BILL_DT,DUE_DATE))+1 AS USE_DT
+		ABS(DATEDIFF(BILL_DT,BILL_RFDT))+1 AS USE_DT
 		,IFNULL(PRE_PRICE_NNVL,0) AS PRE_PRICE
 		,J1.*,J2.* 
 		FROM
