@@ -154,7 +154,7 @@
 			<div class="title-inner">
 				<!-- 타이틀 텝 구성 -->
 				<div class="title_segments" role="tablist">
-					<button class="nav-link active" role="tab" aria-selected="false">계약 현황</button>
+					<button class="nav-link active" role="tab" aria-selected="false">수동청구서 목록</button>
 				</div>
 			</div>
 		</div>
