@@ -30,7 +30,6 @@
 			//로그인(세션) 여부를 판별하여 화면전환 (로그인/메인화면)
 			stMainIdx(sessionVo,location.href); 
 		});
-		
 	</script>
 </head>
 <body>

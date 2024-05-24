@@ -38,7 +38,6 @@
 	<!-- 로그인 시큐어코딩 관련 -->
 	<script src="<%=request.getContextPath()%>/js/loginSC/login.js"></script>
 	<script src="<%=request.getContextPath()%>/js/common/validation.js"></script>
-	
 	<script src="<%=request.getContextPath()%>/js/cloud.js"></script>
 	
 <title>탑</title>
@@ -70,7 +69,6 @@ $(document).ready(function() {
 	
 	$('#navbar').load("/cmn/admin/menu.do");
 	$('#header').load("/cmn/admin/header.do");
-	
 
 });
 

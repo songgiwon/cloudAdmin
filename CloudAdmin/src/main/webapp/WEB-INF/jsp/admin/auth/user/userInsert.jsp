@@ -179,7 +179,7 @@
 						<div class="ctn_tbl_row">
 							<div class="ctn_tbl_th fm_rep">이름</div>
 							<div class="ctn_tbl_td">
-								<input type="text" name="USER_NAME" class="form-control"  maxlength="20" onkeyup="valiChkAll(this,1,1);" onkeydown="valiChkAll(this,1,1);" required>
+								<input type="text" name="USER_NAME" class="form-control"  maxlength="20" onkeyup="valiChkAll(this,1,1,1,1);" onkeydown="valiChkAll(this,1,1,1,1);" required>
 							</div>
 						</div>
 						
@@ -208,14 +208,14 @@
 						<div class="ctn_tbl_row">
 							<div class="ctn_tbl_th">직급</div>
 							<div class="ctn_tbl_td">
-								<input type="text" name="USER_RANK"  maxlength="10" onkeyup="valiChkAll(this,1,1);" onkeydown="valiChkAll(this,1,1);" class="form-control">					
+								<input type="text" name="USER_RANK"  maxlength="10" onkeyup="valiChkAll(this,1,1,1,1);" onkeydown="valiChkAll(this,1,1,1,1);" class="form-control">					
 							</div>
 						</div>
 
 						<div class="ctn_tbl_row">
 							<div class="ctn_tbl_th">부서</div>
 							<div class="ctn_tbl_td">
-								<input type="text" name="USER_DEPT"  maxlength="20" onkeyup="valiChkAll(this,1,1);" onkeydown="valiChkAll(this,1,1);" class="form-control">					
+								<input type="text" name="USER_DEPT"  maxlength="20" onkeyup="valiChkAll(this,1,1,1,1);" onkeydown="valiChkAll(this,1,1,1,1);" class="form-control">					
 							</div>
 						</div>
 						
@@ -236,7 +236,7 @@
 									<input type="text" id="userPhone3" maxlength="4" onkeydown='valiChkAll(this,1)' onkeyup='valiChkAll(this,1)' class="form-control">
 								</div>		
 							</div>
-						</div>
+						</div,
                         
 						<div class="ctn_tbl_row">
 							<div class="ctn_tbl_th">이메일주소</div>
@@ -245,9 +245,10 @@
 								<div class= inputPhone style="width: 500px;">
 									<input type="text" class="form-control" id="userEmail1" style="width:70px;"  maxlength="20" onkeyup="valiChkAll(this,1,1);" onkeydown="valiChkAll(this,1,1);">
 									<p> @ </p>
-									<input type="text" class="form-control" id="userEmail2" style="width:100px;" maxlength="20" onkeyup="valiChkAll(this,1,1);" onkeydown="valiChkAll(this,1,1);" disabled value="gmail.com">
-									<select class="form-control mw_50"  id="selectEmail">
-										<option value="gmail.com" selected>gmail.com</option> 
+									<input type="text" class="form-control" id="userEmail2" style="width:100px;" maxlength="20" onkeyup="valiChkAll(this,1,1,1,1);" onkeydown="valiChkAll(this,1,1,1,1);" disabled value="hivesystem.net">
+									<select class="form-control mw_80"  id="selectEmail">
+										<option value="hivesystem.net" selected>hivesystem.net</option> 
+										<option value="gmail.com">gmail.com</option> 
 										<option value="naver.com">naver.com</option> 
 										<option value="daum.net">daum.net</option> 
 										<option value="nate.com">nate.com</option> 
