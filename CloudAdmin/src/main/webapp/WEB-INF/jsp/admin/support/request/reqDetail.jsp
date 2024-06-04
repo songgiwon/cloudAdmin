@@ -173,7 +173,13 @@
 	<div class="ctn_tbl_row">
 		<div class="ctn_tbl_th">담당자</div>
 		<div class="ctn_tbl_td">
-			${reqVo.ANS_USER_NM}
+			<select class="form-control mw_50"  style="width:120px;" id="areaCodeSel" name="ANS_USER">
+			    <c:forEach var="userVo" items="${userList}">
+					<option value="${userVo.USER_ID}"  
+						<c:if test="${userVo.USER_ID == reqVo.ANS_USER}">selected</c:if>
+					>${userVo.USER_NAME}</option>
+			    </c:forEach>
+			</select>
 		</div>	
 	</div>
 	                                          

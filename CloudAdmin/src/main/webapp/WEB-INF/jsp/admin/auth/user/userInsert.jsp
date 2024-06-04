@@ -236,7 +236,7 @@
 									<input type="text" id="userPhone3" maxlength="4" onkeydown='valiChkAll(this,1)' onkeyup='valiChkAll(this,1)' class="form-control">
 								</div>		
 							</div>
-						</div,
+						</div>
                         
 						<div class="ctn_tbl_row">
 							<div class="ctn_tbl_th">이메일주소</div>
